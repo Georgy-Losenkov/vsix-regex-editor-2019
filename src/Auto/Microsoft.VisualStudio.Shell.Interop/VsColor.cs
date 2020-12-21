@@ -83,7 +83,7 @@ namespace Microsoft.VisualStudio.Shell.Interop
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            result = 0xff000000 | (UInt32)Services.GetSysColor(m_index);
+            result = 0xff000000 | (UInt32)SafeNativeMethods.GetSysColor(m_index);
             return true;
         }
     }

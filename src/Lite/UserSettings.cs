@@ -30,36 +30,39 @@ namespace Losenkov.RegexEditor
         const String DefaultQuickRefFontFamily = "Consolas";
         const Int32 DefaultQuickRefFontSize = 51;
 
-#if (!DEBUG)
-        static Boolean? _isHelpForceShown;
-#endif
-
+#if DEBUG
+        public static Boolean IsHelpForceShown
+        {
+            get { return false; }
+            set { }
+        }
+#else
+        static Boolean? s_isHelpForceShown;
         public static Boolean IsHelpForceShown
         {
             get
             {
-#if (!DEBUG)
-                if (!_isHelpForceShown.HasValue)
+                ThreadHelper.ThrowIfNotOnUIThread();
+
+                if (!s_isHelpForceShown.HasValue)
                 {
-                    _isHelpForceShown = (SettingsStore.GetInt32(CollectionName, IsHelpForceShownPropertyName, 0) != 0);
+                    s_isHelpForceShown = (SettingsStore.GetInt32(CollectionName, IsHelpForceShownPropertyName, 0) != 0);
                 }
-                return _isHelpForceShown.Value;
-#else
-                return false;
-#endif
+                return s_isHelpForceShown.Value;
             }
             set
             {
-#if (!DEBUG)
+                ThreadHelper.ThrowIfNotOnUIThread();
+
                 if (IsHelpForceShown != value)
                 {
-                    _isHelpForceShown = value;
+                    s_isHelpForceShown = value;
                     SettingsStore.CreateCollection(CollectionName);
                     SettingsStore.SetInt32(CollectionName, IsHelpForceShownPropertyName, value ? 1 : 0);
                 }
-#endif
             }
         }
+#endif
 
         public static DateTime GetLastModified()
         {

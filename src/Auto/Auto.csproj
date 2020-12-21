@@ -72,6 +72,7 @@
       <Link>Properties\Common.cs</Link>
     </Compile>
     <Compile Include="Microsoft.Internal.VisualStudio.Shell.Interop\Interfaces.cs" />
+    <Compile Include="Microsoft.VisualStudio.Shell.Interop\SafeNativeMethods.cs" />
     <Compile Include="Microsoft.VisualStudio.Shell.Interop\Services.cs" />
     <Compile Include="Microsoft.VisualStudio.Shell.Interop\ThemeColorsBase.cs" />
     <Compile Include="Microsoft.VisualStudio.Shell.Interop\FontAndColorDefaultsBase.cs" />

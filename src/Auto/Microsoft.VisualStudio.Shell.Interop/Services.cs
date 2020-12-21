@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 using System.Windows.Media;
 using Microsoft.Internal.VisualStudio.Shell.Interop;
 
@@ -12,9 +11,6 @@ namespace Microsoft.VisualStudio.Shell.Interop
         static IVsUIShell5 s_vsUIShell5;
         static IVsFontAndColorUtilities s_fontAndColorUtilities;
         static IVsColorThemeService s_colorThemeService;
-
-        [DllImport("user32.dll")]
-        internal static extern Int32 GetSysColor(Int32 nIndex);
 
         public static Boolean TryGetThemeColor(Guid colorCategory, String colorName, __THEMEDCOLORTYPE colorType, out UInt32 result)
         {

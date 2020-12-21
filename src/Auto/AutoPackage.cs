@@ -46,13 +46,13 @@ namespace Losenkov.RegexEditor
             public static readonly Guid CmdSetGuid = new Guid(CmdSetString);
         }
 
-        internal static class Ids
+        internal static class CmdId
         {
-            public const UInt32 cmdIdOpenPage1 = 256;
-            public const UInt32 cmdIdOpenPage2 = 257;
-            public const UInt32 cmdIdOpenPage3 = 258;
-            public const UInt32 cmdIdOpenQuickRef = 259;
-            public const UInt32 cmdIdOpenQuickStart = 260;
+            public const UInt32 OpenPage1 = 256;
+            public const UInt32 OpenPage2 = 257;
+            public const UInt32 OpenPage3 = 258;
+            public const UInt32 OpenQuickRef = 259;
+            public const UInt32 OpenQuickStart = 260;
         }
         #endregion
 
@@ -84,8 +84,8 @@ namespace Losenkov.RegexEditor
             await JoinableTaskFactory.StartOnIdle(delegate
             {
                 // ensure that we have instance
-                new Shell.FontAndColorDefaultsQuickRef();
-                new Shell.ThemeColorsQuickStart();
+                _ = new Shell.FontAndColorDefaultsQuickRef();
+                _ = new Shell.ThemeColorsQuickStart();
                 ((IServiceContainer)this).AddService(typeof(IFontAndColorDefaultsProvider), this, true);
                 SubscribeForColorChangeEvents();
             });
@@ -107,19 +107,19 @@ namespace Losenkov.RegexEditor
 
             switch (nCmdID)
             {
-                case Ids.cmdIdOpenPage1:
+                case CmdId.OpenPage1:
                     Navigate("https://msdn.microsoft.com/en-us/library/hs600312.aspx");
                     break;
-                case Ids.cmdIdOpenPage2:
+                case CmdId.OpenPage2:
                     Navigate("https://msdn.microsoft.com/en-us/library/az24scfc.aspx");
                     break;
-                case Ids.cmdIdOpenPage3:
+                case CmdId.OpenPage3:
                     Navigate("https://referencesource.microsoft.com/#System/regex/system/text/regularexpressions/Regex.cs");
                     break;
-                case Ids.cmdIdOpenQuickRef:
+                case CmdId.OpenQuickRef:
                     ShowToolWindow<UI.QuickRefToolWindow>();
                     break;
-                case Ids.cmdIdOpenQuickStart:
+                case CmdId.OpenQuickStart:
                     ShowToolWindow<UI.QuickStartToolWindow>();
                     break;
                 default:

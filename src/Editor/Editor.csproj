@@ -81,6 +81,9 @@
     <Compile Include="..\Auto\Microsoft.VisualStudio.Shell.Interop\FontResourceKey.cs">
       <Link>Microsoft.VisualStudio.Shell.Interop\FontResourceKey.cs</Link>
     </Compile>
+    <Compile Include="..\Auto\Microsoft.VisualStudio.Shell.Interop\SafeNativeMethods.cs">
+      <Link>Microsoft.VisualStudio.Shell.Interop\SafeNativeMethods.cs</Link>
+    </Compile>
     <Compile Include="..\Auto\Microsoft.VisualStudio.Shell.Interop\Services.cs">
       <Link>Microsoft.VisualStudio.Shell.Interop\Services.cs</Link>
     </Compile>
