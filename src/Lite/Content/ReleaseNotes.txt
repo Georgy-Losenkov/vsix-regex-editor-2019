@@ -1,0 +1,16 @@
+﻿1.0.5 - December 06, 2020
+---------------------
+Fixed editor UI issues related to async package, namely inability to copy/paste.
+"Colored" pattern editor.
+
+
+1.0.4 - January 16, 2019
+---------------------
+Changed base type of packages to AsyncPackage.
+
+
+1.0.3 - July 01, 2018
+---------------------
+Reduced loading time of the package.
+Fixed colors for the "Dark" theme.
+Added ability to edit colors of the various aspects of the extension through "Fonts and colors" if needed.

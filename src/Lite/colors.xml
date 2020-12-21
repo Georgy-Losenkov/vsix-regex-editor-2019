@@ -1,0 +1,483 @@
+<Themes>
+  <Theme Name="Light" GUID="{de3dbbcd-f642-433c-8353-8f1df4370aba}">
+    <Category Name="Regex Quick Start Window" GUID="{6dee35b4-2d10-4284-8587-61eedb86ec1e}">
+      <Color Name="Title">
+        <Foreground Type="CT_RAW" Source="FF8080FF" />
+      </Color>
+      <Color Name="Text">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="Hyperlink">
+        <Foreground Type="CT_RAW" Source="FF4040FF" />
+      </Color>
+    </Category>
+    <Category Name="Regex Quick Reference Window" GUID="{fab4f962-52fd-4907-ae92-ea70261b06b6}">
+      <Color Name="Document">
+        <Background Type="CT_RAW" Source="FFffffff" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="HeadRow">
+        <Background Type="CT_RAW" Source="FF80a080" />
+        <Foreground Type="CT_RAW" Source="FFffffff" />
+      </Color>
+      <Color Name="OddRow">
+        <Background Type="CT_RAW" Source="FFe0f0e0" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="EvenRow">
+        <Background Type="CT_RAW" Source="FFffffff" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="OddRowArg">
+        <Background Type="CT_RAW" Source="FFC0C0C0" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="EvenRowArg">
+        <Background Type="CT_RAW" Source="FFC0C0C0" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="Hyperlink">
+        <Foreground Type="CT_RAW" Source="FF4040ff" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Grid" GUID="{a902e780-3377-4d30-a8d3-a4d715e89c8b}">
+      <Color Name="NormalCell">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="SelectedCell">
+        <Background Type="CT_RAW" Source="FF007ACC" />
+        <Foreground Type="CT_RAW" Source="FFFFFFFF" />
+      </Color>
+      <Color Name="HeaderCell">
+        <Background Type="CT_RAW" Source="FFF5F5F5" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="InactiveSelectedCell">
+        <Background Type="CT_RAW" Source="FFCCCEDB" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="GridLines">
+        <Foreground Type="CT_RAW" Source="FF808080" />
+      </Color>
+      <Color Name="FailureMarker">
+        <Foreground Type="CT_RAW" Source="FFE00000" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Text" GUID="{16c49e2e-691a-4dbb-9335-5fd06e46aa7e}">
+      <Color Name="Selected Text">
+        <Background Type="CT_RAW" Source="FF000080" />
+      </Color>
+      <Color Name="Plain Text">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Tree" GUID="{9b06dd5f-dd46-40c2-8dc9-0f534d845e68}">
+      <Color Name="Document">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="ActiveSelection">
+        <Background Type="CT_RAW" Source="FF007ACC" />
+        <Foreground Type="CT_RAW" Source="FFFFFFFF" />
+      </Color>
+      <Color Name="InactiveSelection">
+        <Background Type="CT_RAW" Source="FFCCCEDB" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="MatchNodeHeader">
+        <Foreground Type="CT_RAW" Source="FF0000FF" />
+      </Color>
+      <Color Name="CaptureNodeHeader">
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="LineNodeHeader">
+        <Foreground Type="CT_RAW" Source="FFFF6600" />
+      </Color>
+      <Color Name="GroupNodeHeader">
+        <Foreground Type="CT_RAW" Source="FF800000" />
+      </Color>
+      <Color Name="EmptyMarker">
+        <Foreground Type="CT_RAW" Source="FF888888" />
+      </Color>
+      <Color Name="FailureMarker">
+        <Foreground Type="CT_RAW" Source="FFEE0000" />
+      </Color>
+    </Category>
+  </Theme>
+  <Theme Name="Dark" GUID="{1ded0138-47ce-435e-84ef-9ec1f439b749}">
+    <Category Name="ColorizedSignatureHelp colors" GUID="{75a05685-00a8-4ded-bae5-e7a50bfa929a}">
+      <Color Name="regex-editor.input.group01">
+        <Foreground Type="CT_RAW" Source="FF8888FF" />
+      </Color>
+      <Color Name="regex-editor.input.group02">
+        <Foreground Type="CT_RAW" Source="FF00EE00" />
+      </Color>
+      <Color Name="regex-editor.input.group03">
+        <Foreground Type="CT_RAW" Source="FFCC00FF" />
+      </Color>
+      <Color Name="regex-editor.input.group04">
+        <Foreground Type="CT_RAW" Source="FFFF0000" />
+      </Color>
+      <Color Name="regex-editor.input.group05">
+        <Foreground Type="CT_RAW" Source="FF00EEEE" />
+      </Color>
+      <Color Name="regex-editor.input.group06">
+        <Foreground Type="CT_RAW" Source="FFFF8800" />
+      </Color>
+      <Color Name="regex-editor.input.group07">
+        <Foreground Type="CT_RAW" Source="FFFF00BB" />
+      </Color>
+      <Color Name="regex-editor.input.empty-marker">
+        <Background Type="CT_RAW" Source="FF225555" />
+        <Foreground Type="CT_RAW" Source="FFFFFF00" />
+      </Color>
+      <Color Name="regex-editor.input.hightlight">
+        <Background Type="CT_RAW" Source="FF225555" />
+      </Color>
+      <Color Name="regex-editor.pattern.anchor">
+        <Foreground Type="CT_RAW" Source="FFF979AE" />
+      </Color>
+      <Color Name="regex-editor.pattern.grouping">
+        <Foreground Type="CT_RAW" Source="FF2EABFE" />
+      </Color>
+      <Color Name="regex-editor.pattern.escaped-expression">
+        <Foreground Type="CT_RAW" Source="FFD69D85" />
+      </Color>
+      <Color Name="regex-editor.pattern.expression">
+        <Foreground Type="CT_RAW" Source="FF2EABFE" />
+      </Color>
+      <Color Name="regex-editor.pattern.quantifier">
+        <Foreground Type="CT_RAW" Source="FFF979AE" />
+      </Color>
+      <Color Name="regex-editor.replacement.substitution">
+        <Foreground Type="CT_RAW" Source="FF5555FF" />
+      </Color>
+    </Category>
+    <Category Name="Regex Quick Start Window" GUID="{6dee35b4-2d10-4284-8587-61eedb86ec1e}">
+      <Color Name="Title">
+        <Foreground Type="CT_RAW" Source="FF88CCFF" />
+      </Color>
+      <Color Name="Text">
+        <Background Type="CT_RAW" Source="FF222222" />
+        <Foreground Type="CT_RAW" Source="FFEEEEEE" />
+      </Color>
+      <Color Name="Hyperlink">
+        <Foreground Type="CT_RAW" Source="FF0099FF" />
+      </Color>
+    </Category>
+    <Category Name="Regex Quick Reference Window" GUID="{fab4f962-52fd-4907-ae92-ea70261b06b6}">
+      <Color Name="Document">
+        <Background Type="CT_RAW" Source="FF222222" />
+        <Foreground Type="CT_RAW" Source="FFDDDDDD" />
+      </Color>
+      <Color Name="HeadRow">
+        <Background Type="CT_RAW" Source="FF334444" />
+        <Foreground Type="CT_RAW" Source="FFDDDDDD" />
+      </Color>
+      <Color Name="OddRow">
+        <Background Type="CT_RAW" Source="FF223333" />
+        <Foreground Type="CT_RAW" Source="FFDDDDDD" />
+      </Color>
+      <Color Name="EvenRow">
+        <Background Type="CT_RAW" Source="FF222222" />
+        <Foreground Type="CT_RAW" Source="FFDDDDDD" />
+      </Color>
+      <Color Name="OddRowArg">
+        <Background Type="CT_RAW" Source="FF555555" />
+        <Foreground Type="CT_RAW" Source="FFDDDDDD" />
+      </Color>
+      <Color Name="EvenRowArg">
+        <Background Type="CT_RAW" Source="FF555555" />
+        <Foreground Type="CT_RAW" Source="FFDDDDDD" />
+      </Color>
+      <Color Name="Hyperlink">
+        <Background Type="CT_RAW" Source="FF222222" />
+        <Foreground Type="CT_RAW" Source="FF0099FF" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Grid" GUID="{a902e780-3377-4d30-a8d3-a4d715e89c8b}">
+      <Color Name="NormalCell">
+        <Background Type="CT_RAW" Source="FF222222" />
+        <Foreground Type="CT_RAW" Source="FFEEEEEE" />
+      </Color>
+      <Color Name="SelectedCell">
+        <Background Type="CT_RAW" Source="FF007ACC" />
+        <Foreground Type="CT_RAW" Source="FFEEEEEE" />
+      </Color>
+      <Color Name="HeaderCell">
+        <Background Type="CT_RAW" Source="FF444444" />
+        <Foreground Type="CT_RAW" Source="FFEEEEEE" />
+      </Color>
+      <Color Name="InactiveSelectedCell">
+        <Background Type="CT_RAW" Source="FF3F3F46" />
+        <Foreground Type="CT_RAW" Source="FFEEEEEE" />
+      </Color>
+      <Color Name="GridLines">
+        <Foreground Type="CT_RAW" Source="FF808080" />
+      </Color>
+      <Color Name="FailureMarker">
+        <Foreground Type="CT_RAW" Source="FFEE0000" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Text" GUID="{16c49e2e-691a-4dbb-9335-5fd06e46aa7e}">
+      <Color Name="Selected Text">
+        <Background Type="CT_RAW" Source="FF0077DD" />
+      </Color>
+      <Color Name="Plain Text">
+        <Background Type="CT_RAW" Source="FF222222" />
+        <Foreground Type="CT_RAW" Source="FFEEEEEE" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Tree" GUID="{9b06dd5f-dd46-40c2-8dc9-0f534d845e68}">
+      <Color Name="Document">
+        <Background Type="CT_RAW" Source="FF222222" />
+        <Foreground Type="CT_RAW" Source="FFEEEEEE" />
+      </Color>
+      <Color Name="ActiveSelection">
+        <Background Type="CT_RAW" Source="FF007ACC" />
+        <Foreground Type="CT_RAW" Source="FFEEEEEE" />
+      </Color>
+      <Color Name="InactiveSelection">
+        <Background Type="CT_RAW" Source="FF3F3F46" />
+        <Foreground Type="CT_RAW" Source="FFEEEEEE" />
+      </Color>
+      <Color Name="LineNodeHeader">
+        <Foreground Type="CT_RAW" Source="FFFF6600" />
+      </Color>
+      <Color Name="MatchNodeHeader">
+        <Foreground Type="CT_RAW" Source="FF7777FF" />
+      </Color>
+      <Color Name="GroupNodeHeader">
+        <Foreground Type="CT_RAW" Source="FFFF4444" />
+      </Color>
+      <Color Name="CaptureNodeHeader">
+        <Foreground Type="CT_RAW" Source="FFEEEEEE" />
+      </Color>
+      <Color Name="EmptyMarker">
+        <Foreground Type="CT_RAW" Source="FF777777" />
+      </Color>
+      <Color Name="FailureMarker">
+        <Foreground Type="CT_RAW" Source="FFEE0000" />
+      </Color>
+    </Category>
+  </Theme>
+  <Theme Name="Blue" GUID="{a4d6a176-b948-4b29-8c66-53c97a1ed7d0}">
+    <Category Name="Regex Quick Start Window" GUID="{6dee35b4-2d10-4284-8587-61eedb86ec1e}">
+      <Color Name="Title">
+        <Foreground Type="CT_RAW" Source="FF8080FF" />
+      </Color>
+      <Color Name="Text">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="Hyperlink">
+        <Foreground Type="CT_RAW" Source="FF4040FF" />
+      </Color>
+    </Category>
+    <Category Name="Regex Quick Reference Window" GUID="{fab4f962-52fd-4907-ae92-ea70261b06b6}">
+      <Color Name="Document">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="HeadRow">
+        <Background Type="CT_RAW" Source="FF80A080" />
+        <Foreground Type="CT_RAW" Source="FFFFFFFF" />
+      </Color>
+      <Color Name="OddRow">
+        <Background Type="CT_RAW" Source="FFE0F0E0" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="EvenRow">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="OddRowArg">
+        <Background Type="CT_RAW" Source="FFC0C0C0" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="EvenRowArg">
+        <Background Type="CT_RAW" Source="FFC0C0C0" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="Hyperlink">
+        <Foreground Type="CT_RAW" Source="FF4040FF" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Grid" GUID="{a902e780-3377-4d30-a8d3-a4d715e89c8b}">
+      <Color Name="NormalCell">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="SelectedCell">
+        <Background Type="CT_RAW" Source="FF007ACC" />
+        <Foreground Type="CT_RAW" Source="FFFFFFFF" />
+      </Color>
+      <Color Name="HeaderCell">
+        <Background Type="CT_RAW" Source="FFE0E0E0" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="InactiveSelectedCell">
+        <Background Type="CT_RAW" Source="FFCCCEDB" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="GridLines">
+        <Foreground Type="CT_RAW" Source="FF808080" />
+      </Color>
+      <Color Name="FailureMarker">
+        <Foreground Type="CT_RAW" Source="FFEE0000" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Text" GUID="{16c49e2e-691a-4dbb-9335-5fd06e46aa7e}">
+      <Color Name="Selected Text">
+        <Background Type="CT_RAW" Source="FF0077DD" />
+      </Color>
+      <Color Name="Plain Text">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Tree" GUID="{9b06dd5f-dd46-40c2-8dc9-0f534d845e68}">
+      <Color Name="Document">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="ActiveSelection">
+        <Background Type="CT_RAW" Source="FF007ACC" />
+        <Foreground Type="CT_RAW" Source="FFFFFFFF" />
+      </Color>
+      <Color Name="InactiveSelection">
+        <Background Type="CT_RAW" Source="FFCCCEDB" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="MatchNodeHeader">
+        <Foreground Type="CT_RAW" Source="FF0000FF" />
+      </Color>
+      <Color Name="CaptureNodeHeader">
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="LineNodeHeader">
+        <Foreground Type="CT_RAW" Source="FFFF6600" />
+      </Color>
+      <Color Name="GroupNodeHeader">
+        <Foreground Type="CT_RAW" Source="FF800000" />
+      </Color>
+      <Color Name="EmptyMarker">
+        <Foreground Type="CT_RAW" Source="FF888888" />
+      </Color>
+      <Color Name="FailureMarker">
+        <Foreground Type="CT_RAW" Source="FFEE0000" />
+      </Color>
+    </Category>
+  </Theme>
+  <Theme Name="HighContrast" GUID="{a5c004b4-2d4b-494e-bf01-45fc492522c7}">
+    <Category Name="Regex Quick Start Window" GUID="{6dee35b4-2d10-4284-8587-61eedb86ec1e}">
+      <Color Name="Title">
+        <Foreground Type="CT_RAW" Source="FF8080FF" />
+      </Color>
+      <Color Name="Text">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="Hyperlink">
+        <Foreground Type="CT_RAW" Source="FF4040FF" />
+      </Color>
+    </Category>
+    <Category Name="Regex Quick Reference Window" GUID="{fab4f962-52fd-4907-ae92-ea70261b06b6}">
+      <Color Name="Document">
+        <Background Type="CT_RAW" Source="FFffffff" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="HeadRow">
+        <Background Type="CT_RAW" Source="FF80a080" />
+        <Foreground Type="CT_RAW" Source="FFffffff" />
+      </Color>
+      <Color Name="OddRow">
+        <Background Type="CT_RAW" Source="FFe0f0e0" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="EvenRow">
+        <Background Type="CT_RAW" Source="FFffffff" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="OddRowArg">
+        <Background Type="CT_RAW" Source="FFC0C0C0" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="EvenRowArg">
+        <Background Type="CT_RAW" Source="FFC0C0C0" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="Hyperlink">
+        <Foreground Type="CT_RAW" Source="FF4040ff" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Grid" GUID="{a902e780-3377-4d30-a8d3-a4d715e89c8b}">
+      <Color Name="NormalCell">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="SelectedCell">
+        <Background Type="CT_RAW" Source="FF007ACC" />
+        <Foreground Type="CT_RAW" Source="FFFFFFFF" />
+      </Color>
+      <Color Name="HeaderCell">
+        <Background Type="CT_RAW" Source="FFF5F5F5" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="InactiveSelectedCell">
+        <Background Type="CT_RAW" Source="FFCCCEDB" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="GridLines">
+        <Foreground Type="CT_RAW" Source="FF808080" />
+      </Color>
+      <Color Name="FailureMarker">
+        <Foreground Type="CT_RAW" Source="FFE00000" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Text" GUID="{16c49e2e-691a-4dbb-9335-5fd06e46aa7e}">
+      <Color Name="Selected Text">
+        <Background Type="CT_RAW" Source="FF000080" />
+      </Color>
+      <Color Name="Plain Text">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+    </Category>
+    <Category Name="Regex Editor Results Tree" GUID="{9b06dd5f-dd46-40c2-8dc9-0f534d845e68}">
+      <Color Name="Document">
+        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="ActiveSelection">
+        <Background Type="CT_RAW" Source="FF007ACC" />
+        <Foreground Type="CT_RAW" Source="FFFFFFFF" />
+      </Color>
+      <Color Name="InactiveSelection">
+        <Background Type="CT_RAW" Source="FFCCCEDB" />
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="MatchNodeHeader">
+        <Foreground Type="CT_RAW" Source="FF0000FF" />
+      </Color>
+      <Color Name="CaptureNodeHeader">
+        <Foreground Type="CT_RAW" Source="FF000000" />
+      </Color>
+      <Color Name="LineNodeHeader">
+        <Foreground Type="CT_RAW" Source="FFFF6600" />
+      </Color>
+      <Color Name="GroupNodeHeader">
+        <Foreground Type="CT_RAW" Source="FF800000" />
+      </Color>
+      <Color Name="EmptyMarker">
+        <Foreground Type="CT_RAW" Source="FF888888" />
+      </Color>
+      <Color Name="FailureMarker">
+        <Foreground Type="CT_RAW" Source="FFEE0000" />
+      </Color>
+    </Category>
+  </Theme>
+</Themes>
