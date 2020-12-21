@@ -1,0 +1,32 @@
+﻿<UserControl
+    x:Class="Losenkov.RegexEditor.UI.View.TextControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:v="clr-namespace:Losenkov.RegexEditor.UI.View"
+    xmlns:vm="clr-namespace:Losenkov.RegexEditor.UI.ViewModel"
+    d:DataContext="{x:Static vm:ResultsViewModel.SampleText}"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    UseLayoutRounding="True"
+    mc:Ignorable="d">
+    <TextBox
+        AcceptsReturn="True"
+        AcceptsTab="True"
+        AutoWordSelection="True"
+        Background="{DynamicResource {x:Static v:TextColors.PlainTextBackgroundBrushKey}}"
+        BorderThickness="0"
+        FontFamily="{DynamicResource {x:Static v:TextColors.FontFamilyKey}}"
+        FontSize="{DynamicResource {x:Static v:TextColors.FontSizeKey}}"
+        ForceCursor="True"
+        Foreground="{DynamicResource {x:Static v:TextColors.PlainTextForegroundBrushKey}}"
+        HorizontalScrollBarVisibility="Auto"
+        IsInactiveSelectionHighlightEnabled="True"
+        IsReadOnly="True"
+        IsReadOnlyCaretVisible="True"
+        SelectionBrush="{DynamicResource {x:Static v:TextColors.SelectedTextBackgroundBrushKey}}"
+        SelectionOpacity="0.4"
+        Text="{Binding Mode=OneWay}"
+        VerticalScrollBarVisibility="Auto" />
+</UserControl>

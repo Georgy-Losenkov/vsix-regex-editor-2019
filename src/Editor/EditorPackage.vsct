@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable"
+              xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              >
+
+    <!--  This is the file that defines the actual layout and type of the commands.
+        It is divided in different sections (e.g. command definition, command
+        placement, ...), with each defining a specific set of properties.
+        See the comment before each section for more details about how to
+        use it. -->
+
+    <!--  The VSCT compiler (the tool that translates this file into the binary
+        format that VisualStudio will consume) has the ability to run a preprocessor
+        on the vsct file; this preprocessor is (usually) the C++ preprocessor, so
+        it is possible to define includes and macros with the same syntax used
+        in C++ files. Using this ability of the compiler here, we include some files
+        defining some of the constants that we will use inside the file. -->
+
+    <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+    <Extern href="stdidcmd.h" />
+
+    <!--This header contains the command ids for the menus provided by the shell. -->
+    <Extern href="vsshlids.h" />
+
+    <!--The Commands section is where commands, menus, and menu groups are defined.
+      This section uses a Guid to identify the package that provides the command defined inside it. -->
+    <Commands package="guidEditorPackage">
+        <!-- Inside this section we have different sub-sections: one for the menus, another
+             for the menu groups, one for the buttons (the actual commands), one for the combos
+             and the last one for the bitmaps used. Each element is identified by a command id that
+             is a unique pair of guid and numeric identifier; the guid part of the identifier is usually
+             called "command set" and is used to group different command inside a logically related
+             group; your package should define its own command set in order to avoid collisions
+             with command ids defined by other packages. -->
+
+        <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
+        <Bitmaps>
+            <!--  The bitmap id is defined in a way that is a little bit different from the others:
+                  the declaration starts with a guid for the bitmap strip, then there is the resource id of the
+                  bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
+                  inside a button definition. An important aspect of this declaration is that the element id
+                  must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
+            <Bitmap guid="guidImages" href="Resources\MenuIcons.png" usedList="bmpNewEditor, bmpToggleResults, bmpExecute, bmpQuickRef" />
+        </Bitmaps>
+
+
+        <!--Buttons section. -->
+        <!--This section defines the elements the user can interact with, like a menu command or a button
+        or combo box in a toolbar. -->
+        <Buttons>
+            <!-- To define a menu group you have to specify its ID, the parent menu and its display priority.
+                 The command is visible and enabled by default. If you need to change the visibility, status, etc, you can use
+                 the CommandFlag node.
+                 You can add more than one CommandFlag node e.g.:
+                     <CommandFlag>DefaultInvisible</CommandFlag>
+                     <CommandFlag>DynamicVisibility</CommandFlag>
+                 If you do not want an image next to your command, remove the Icon node /> -->
+            <Button guid="guidEditorCmdSet" id="cmdidOpenEditor" priority="0x0100" type="Button">
+                <Parent guid="guidLiteCmdSet" id="menuRegexEditorGroupEditor" />
+                <Icon guid="guidImages" id="bmpNewEditor" />
+                <Strings>
+                    <ButtonText>New Editor</ButtonText>
+                </Strings>
+            </Button>
+            <Button guid="guidEditorCmdSet" id="cmdidEditorRunRegexPrimary" priority="0x0102" type="Button">
+                <Parent guid="guidEditorCmdSet" id="toolbarEditorGroup1" />
+                <Icon guid="guidImages" id="bmpExecute" />
+                <CommandFlag>IconAndText</CommandFlag>
+                <Strings>
+                    <ButtonText>Run</ButtonText>
+                </Strings>
+            </Button>
+            <Button guid="guidEditorCmdSet" id="cmdidEditorToggleResultsPrimary" priority="0x0100" type="Button">
+                <Parent guid="guidEditorCmdSet" id="toolbarEditorGroup2" />
+                <Icon guid="guidImages" id="bmpToggleResults" />
+                <Strings>
+                    <ButtonText>Toggle Results</ButtonText>
+                </Strings>
+            </Button>
+            <Button guid="guidEditorCmdSet" id="cmdidEditorRunRegexSecondary" priority="0x0100" type="Button">
+                <Parent guid="guidEditorCmdSet" id="toolbarEditorGroup3" />
+                <CommandFlag>CommandWellOnly</CommandFlag>
+                <CommandFlag>DefaultInvisible</CommandFlag>
+                <Strings>
+                    <ButtonText>Execute</ButtonText>
+                    <CommandName>RegexEditor.Editor.Execute</CommandName>
+                    <CanonicalName>RegexEditor.Editor.Execute</CanonicalName>
+                    <LocCanonicalName>RegexEditor.Editor.Execute</LocCanonicalName>
+                </Strings>
+            </Button>
+            <Button guid="guidEditorCmdSet" id="cmdidEditorToggleResultsSecondary" priority="0x0101" type="Button">
+                <Parent guid="guidEditorCmdSet" id="toolbarEditorGroup3" />
+                <CommandFlag>CommandWellOnly</CommandFlag>
+                <CommandFlag>DefaultInvisible</CommandFlag>
+                <Strings>
+                    <ButtonText>Toggle Results</ButtonText>
+                    <CommandName>RegexEditor.Editor.ToggleResults</CommandName>
+                    <CanonicalName>RegexEditor.Editor.ToggleResults</CanonicalName>
+                    <LocCanonicalName>RegexEditor.Editor.ToggleResults</LocCanonicalName>
+                </Strings>
+            </Button>
+        </Buttons>
+
+        <Combos>
+            <Combo guid="guidEditorCmdSet" id="cmdidEditorRegexMethod" idCommandList="cmdidEditorRegexMethodItems"
+                   defaultWidth="200" priority="0x0100">
+                <Parent guid="guidEditorCmdSet" id="toolbarEditorGroup1" />
+                <Strings>
+                    <ButtonText>Regex method</ButtonText>
+                </Strings>
+            </Combo>
+            <Combo guid="guidEditorCmdSet" id="cmdidEditorTesterMode" idCommandList="cmdidEditorTesterModeItems"
+                   defaultWidth="200" priority="0x0101">
+                <Parent guid="guidEditorCmdSet" id="toolbarEditorGroup1" />
+                <Strings>
+                    <ButtonText>Mode</ButtonText>
+                </Strings>
+            </Combo>
+        </Combos>
+
+        <Groups>
+            <!-- group in the toolbar placed on the Editor tool window -->
+            <Group guid="guidEditorCmdSet" id="toolbarEditorGroup1" priority="0x0000">
+                <Parent guid="guidEditorCmdSet" id="toolbarEditor" />
+            </Group>
+            <Group guid="guidEditorCmdSet" id="toolbarEditorGroup2" priority="0x0001">
+                <Parent guid="guidEditorCmdSet" id="toolbarEditor" />
+            </Group>
+            <Group guid="guidEditorCmdSet" id="toolbarEditorGroup3" priority="0x0001">
+                <Parent guid="guidEditorCmdSet" id="toolbarEditor" />
+            </Group>
+        </Groups>
+
+        <Menus>
+            <!-- toolbar placed on the Editor tool window -->
+            <Menu guid="guidEditorCmdSet" id="toolbarEditor" type="ToolWindowToolbar">
+                <CommandFlag>DefaultDocked</CommandFlag>
+                <Strings>
+                    <ButtonText>Test Toolbar</ButtonText>
+                    <CommandName>Test Toolbar</CommandName>
+                </Strings>
+            </Menu>
+            <!--<Menu guid="guidEditorCmdSet" id="toolbarEditor" type="Context">
+                <Strings>
+                    <ButtonText>Hidden Context Menu</ButtonText>
+                    <CanonicalName>RegexEditor</CanonicalName>
+                    <LocCanonicalName>RegexEditor</LocCanonicalName>
+                </Strings>
+            </Menu>-->
+        </Menus>
+    </Commands>
+
+    <Symbols>
+        <!-- This is the package guid. -->
+        <GuidSymbol name="guidEditorPackage" value="{78e3e2c3-eacf-4bd3-a875-a0db379d8e3b}" />
+
+        <!-- This is the guid used to group the menu commands together -->
+        <GuidSymbol name="guidLiteCmdSet" value="{580d96c9-c729-4e15-be6a-02d314275ece}">
+            <IDSymbol name="menuToolsGroupRegexEditor" value="4128" />
+            <IDSymbol name="menuRegexEditor" value="4129" />
+            <IDSymbol name="menuRegexEditorGroupEditor" value="4130" />
+            <IDSymbol name="menuRegexEditorGroupHelp" value="4131" />
+        </GuidSymbol>
+
+        <!-- This is the guid used to group the menu commands together -->
+        <GuidSymbol name="guidEditorCmdSet" value="{6e7a508d-0c48-4703-8e50-8e8eba9508b6}">
+            <IDSymbol value="4128" name="toolbarEditor" />
+            <IDSymbol value="4129" name="toolbarEditorGroup1" />
+            <IDSymbol value="4130" name="toolbarEditorGroup2" />
+            <IDSymbol value="4131" name="toolbarEditorGroup3" />
+            <IDSymbol value="256" name="cmdidOpenEditor" />
+            <IDSymbol value="257" name="cmdidEditorRunRegexPrimary" />
+            <IDSymbol value="258" name="cmdidEditorRunRegexSecondary" />
+            <IDSymbol value="259" name="cmdidEditorToggleResultsPrimary" />
+            <IDSymbol value="260" name="cmdidEditorToggleResultsSecondary" />
+            <IDSymbol value="512" name="cmdidEditorRegexMethod" />
+            <IDSymbol value="513" name="cmdidEditorRegexMethodItems" />
+            <IDSymbol value="514" name="cmdidEditorTesterMode" />
+            <IDSymbol value="515" name="cmdidEditorTesterModeItems" />
+        </GuidSymbol>
+
+        <GuidSymbol name="guidImages" value="{25190db0-acc7-4a26-8a99-a6cfd3c9ad7e}">
+            <IDSymbol name="bmpNewEditor" value="1" />
+            <IDSymbol name="bmpToggleResults" value="2" />
+            <IDSymbol name="bmpExecute" value="3" />
+            <IDSymbol name="bmpQuickRef" value="4" />
+        </GuidSymbol>
+    </Symbols>
+</CommandTable>

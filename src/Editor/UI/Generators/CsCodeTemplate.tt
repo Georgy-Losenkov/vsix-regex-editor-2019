@@ -1,0 +1,193 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" inherits="CodeTemplateBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="System.Collections.Generic" #>
+namespace Test
+{
+  using System;
+  using System.Text.RegularExpressions;
+
+  static class Program
+  {
+<#
+  for (var i = 0; i < this.Methods.Length; i++)
+  {
+    var method = this.Methods[i];
+    var methodName = (this.Methods.Length == 1) ? "Main" : String.Format("Test{0}", i);
+
+#>
+    static void <#= methodName #>(String[] args)
+    {
+      var pattern = <#= this.QuoteSnippetString(this.PatternText, "        ") #>;
+      var options = <#= String.Join(" | ", this.Options) #>;
+      var regex = new Regex(pattern, options, TimeSpan.FromMilliseconds(1000));
+<#
+    if (method.RegexMethod == Model.RegexMethod.Match)
+    {
+#>
+
+      var groupNames = regex.GetGroupNames();
+      var groupNumbers = regex.GetGroupNumbers();
+<#
+    }
+    if (method.RegexMethod == Model.RegexMethod.Replace)
+    {
+#>
+
+      var replacement = <#= this.QuoteSnippetString(this.ReplacementText, "        ") #>;
+<#
+    }
+#>
+
+      var input = <#= this.QuoteSnippetString(this.InputText, "        ") #>;
+
+<#
+    if (method.MultilineInput)
+    {
+#>
+      using (var reader = new System.IO.StringReader(input))
+      {
+        for (var i = 1;; i++)
+        {
+          var line = reader.ReadLine();
+          if (line == null) break;
+
+<#
+      if (method.RegexMethod == Model.RegexMethod.Match)
+      {
+#>
+          var match = regex.Match(line);
+          if (match.Success)
+          {
+            Console.WriteLine("Line[{0}] matches pattern", i);
+
+            for (var j = 0; match.Success; j++, match = match.NextMatch())
+            {
+              Console.WriteLine("  Match[{0}] is {1}: {2}", j, match.GetType().Name, match.Value);
+
+              for (var k = 0; k < groupNumbers.Length; k++)
+              {
+                var number = groupNumbers[k];
+                var name = groupNames[k];
+                var group = match.Groups[number];
+                var value = group.Success ? group.Value : "--- FAILURE ---";
+                Console.WriteLine("    Group[{0} or '{1}'] is {2}: {3}", number, name, group.GetType().Name, value);
+
+                for (var l = 0; l < group.Captures.Count; l++)
+                {
+                  var capture = group.Captures[l];
+                  Console.WriteLine("      Capture[{0}] is {1}: {2}", l, capture.GetType().Name, capture.Value);
+                }
+              }
+            }
+          }
+          else
+          {
+            Console.WriteLine("Line[{0}] does not match pattern", i);
+          }
+<#
+      }
+      else if (method.RegexMethod == Model.RegexMethod.Replace)
+      {
+#>
+          var result = regex.Replace(line, replacement);
+          Console.WriteLine("Line[{0}]: ", i, result);
+<#
+      }
+      else if (method.RegexMethod == Model.RegexMethod.Split)
+      {
+#>
+          var result = regex.Split(line);
+          Console.WriteLine("Line[{0}] has been split into {1} chunk(s)", i, result.Length);
+          for (var j = 0; j < result.Length; j++)
+          {
+            Console.WriteLine("  Chunk[{0}]: {1}", j, result[j]);
+          }
+<#
+      }
+#>
+        }
+      }
+<#
+    }
+    else
+    {
+      if (method.RegexMethod == Model.RegexMethod.Match)
+      {
+#>
+      var match = regex.Match(input);
+      if (match.Success)
+      {
+        Console.WriteLine("Input matches pattern");
+        for (var i = 0; match.Success; i++, match = match.NextMatch())
+        {
+          Console.WriteLine("Match[{0}] is {1}: {2}", i, match.GetType().Name, match.Value);
+
+          for (var j = 0; j < groupNumbers.Length; j++)
+          {
+            var number = groupNumbers[j];
+            var name = groupNames[j];
+            var group = match.Groups[number];
+            var value = group.Success ? group.Value : "--- FAILURE ---";
+            Console.WriteLine("  Group[{0} or '{1}'] is {2}: {3}", number, name, group.GetType().Name, value);
+
+            for (var k = 0; k < group.Captures.Count; k++)
+            {
+              var capture = group.Captures[k];
+              Console.WriteLine("    Capture[{0}] is {1}: {2}", k, capture.GetType().Name, capture.Value);
+            }
+          }
+        }
+      }
+      else
+      {
+        Console.WriteLine("Input does not match pattern");
+      }
+<#
+      }
+      else if (method.RegexMethod == Model.RegexMethod.Replace)
+      {
+#>
+      var result = regex.Replace(input, replacement);
+      Console.WriteLine(result);
+<#
+      }
+      else if (method.RegexMethod == Model.RegexMethod.Split)
+      {
+#>
+      var result = regex.Split(input);
+      Console.WriteLine("Input has been split into {0} chunks", result.Length);
+      for (var i = 0; i < result.Length; i++)
+      {
+        Console.WriteLine("  Chunk[{0}]: {1}", i, result[i]);
+      }
+<#
+      }
+    }
+#>
+    }
+<#
+  }
+
+  if (this.Methods.Length != 1)
+  {
+#>
+    static void Main(String[] args)
+    {
+<#
+    for (Int32 i = 0; i < this.Methods.Length; i++)
+    {
+      var methodName = String.Format("Test{0}", i);
+#>
+      <#= methodName #>(args);
+<#
+    }
+#>
+    }
+<#
+  }
+#>
+  }
+}

@@ -1,0 +1,189 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" inherits="CodeTemplateBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="System.Collections.Generic" #>
+Option Explicit On
+Option Strict On
+
+Imports System
+Imports System.Text.RegularExpressions
+Imports VB = Microsoft.VisualBasic
+
+Namespace Test
+  Module Program
+<#
+  for (Int32 i = 0; i < this.Methods.Length; i++)
+  {
+    var method = this.Methods[i];
+    var methodName = (this.Methods.Length == 1) ? "Main" : String.Format("Test{0}", i);
+
+#>
+    Sub <#= methodName #>(ByVal args As String())
+      Dim pattern As String = <#= this.QuoteSnippetString(this.PatternText, "        ") #>
+      Dim options As RegexOptions = <#= String.Join(" | ", this.Options) #>
+      Dim regex As New Regex(pattern, options, TimeSpan.FromMilliseconds(1000))
+<#
+    if (method.RegexMethod == Model.RegexMethod.Match)
+    {
+#>
+
+      Dim groupNames As String() = regex.GetGroupNames()
+      Dim groupNumbers As Int32() = regex.GetGroupNumbers()
+<#
+    }
+    if (method.RegexMethod == Model.RegexMethod.Replace)
+    {
+#>
+
+      Dim replacement As String = <#= this.QuoteSnippetString(this.ReplacementText, "        ") #>
+<#
+    }
+#>
+
+      Dim input As String = <#= this.QuoteSnippetString(this.InputText, "        ") #>
+
+<#
+    if (method.MultilineInput)
+    {
+#>
+      Using reader As New System.IO.StringReader(input)
+        Dim i As Int32 = 1
+        While True
+          Dim line As String = reader.ReadLine()
+          If line Is Nothing Then Exit While
+
+<#
+      if (method.RegexMethod == Model.RegexMethod.Match)
+      {
+#>
+          Dim match As Match = regex.Match(line)
+          If match.Success Then
+            Console.WriteLine("Line[{0}] matches pattern", i)
+
+            Dim j As Int32 = 0
+            Do
+              Console.WriteLine("  Match[{0}] is {1}: {2}", j, match.GetType().Name, match.Value)
+
+              For k As Int32 = 0 To groupNumbers.Length - 1
+                Dim number As Int32 = groupNumbers(k)
+                Dim name As String = groupNames(k)
+                Dim group As Group = match.Groups(number)
+                Dim value As String = If(group.Success, group.Value, "--- FAILURE ---")
+                Console.WriteLine("    Group[{0} or '{1}'] is {2}: {3}", number, name, group.GetType().Name, value)
+
+                For l As Int32 = 0 To group.Captures.Count - 1
+                  Dim capture As Capture = group.Captures(l)
+                  Console.WriteLine("      Capture[{0}] is {1}: {2}", l, capture.GetType().Name, capture.Value)
+                Next
+              Next
+
+              j += 1
+              match = match.NextMatch()
+            Loop While match.Success
+          Else
+            Console.WriteLine("Line[{0}] does not match pattern", i)
+          End If
+<#
+      }
+      else if (method.RegexMethod == Model.RegexMethod.Replace)
+      {
+#>
+          Dim result As String = regex.Replace(line, replacement)
+          Console.WriteLine("Line[{0}]: ", i, result)
+<#
+      }
+      else if (method.RegexMethod == Model.RegexMethod.Split)
+      {
+#>
+          Dim result As String() = regex.Split(line)
+          Console.WriteLine("Line[{0}] has been split into {1} chunk(s)", i, result.Length)
+          For j As Int32 = 0 To result.Length - 1
+            Console.WriteLine("  Chunk[{0}]: {1}", j, result(j))
+          Next
+<#
+      }
+#>
+
+          i += 1
+        End While
+      End Using
+<#
+    }
+    else
+    {
+      if (method.RegexMethod == Model.RegexMethod.Match)
+      {
+#>
+      Dim match As Match = regex.Match(input)
+      If match.Success Then
+        Console.WriteLine("Input matches pattern")
+
+        Dim i As Int32 = 0
+        Do
+          Console.WriteLine("Match[{0}] is {1}: {2}", i, match.GetType().Name, match.Value)
+
+          For j As Int32 = 0 to groupNumbers.Length - 1
+            Dim number As Int32 = groupNumbers(j)
+            Dim name As String = groupNames(j)
+            Dim group As Group = match.Groups(number)
+            Dim value As String = If(group.Success, group.Value, "--- FAILURE ---")
+            Console.WriteLine("  Group[{0} or '{1}'] is {2}: {3}", number, name, group.GetType().Name, value)
+
+            For k As Int32 = 0 To group.Captures.Count - 1
+              Dim capture As Capture = group.Captures(k)
+              Console.WriteLine("    Capture[{0}] is {1}: {2}", k, capture.GetType().Name, capture.Value)
+            Next
+          Next
+
+          i += 1
+          match = match.NextMatch()
+        Loop While match.Success
+      Else
+        Console.WriteLine("Input does not match pattern")
+      End If
+<#
+      }
+      else if (method.RegexMethod == Model.RegexMethod.Replace)
+      {
+#>
+      Dim result As String = regex.Replace(input, replacement)
+      Console.WriteLine(result)
+<#
+      }
+      else if (method.RegexMethod == Model.RegexMethod.Split)
+      {
+#>
+      Dim result As String() = regex.Split(input)
+      Console.WriteLine("Input has been split into {0} chunks", result.Length)
+      For i As Int32 = 0 To result.Length - 1
+        Console.WriteLine("  Chunk[{0}]: {1}", i, result(i))
+      Next
+<#
+      }
+    }
+#>
+    End Sub
+<#
+  }
+
+  if (this.Methods.Length != 1)
+  {
+#>
+    Sub Main(ByVal args As String())
+<#
+    for (Int32 i = 0; i < this.Methods.Length; i++)
+    {
+      var methodName = String.Format("Test{0}", i);
+#>
+      <#= methodName #>(args)
+<#
+    }
+#>
+    End Sub
+<#
+  }
+#>
+  End Module
+End Namespace

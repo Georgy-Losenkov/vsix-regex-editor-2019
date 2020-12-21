@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <UseCodebase>true</UseCodebase>
+    <TargetFrameworkProfile />
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Losenkov.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <!-- <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids> -->
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{DEDA6511-5964-4F09-ACC6-47FE8413F070}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Losenkov.RegexEditor</RootNamespace>
+    <AssemblyName>Losenkov.RegexEditor.Editor</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <GeneratePkgDefFile>true</GeneratePkgDefFile>
+    <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
+    <IncludeDebugSymbolsInVSIXContainer>true</IncludeDebugSymbolsInVSIXContainer>
+    <IncludeDebugSymbolsInLocalVSIXDeployment>true</IncludeDebugSymbolsInLocalVSIXDeployment>
+    <CopyBuildOutputToOutputDirectory>true</CopyBuildOutputToOutputDirectory>
+    <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CreateVsixContainer>false</CreateVsixContainer>
+    <DeployExtension>false</DeployExtension>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CreateVsixContainer>false</CreateVsixContainer>
+    <DeployExtension>false</DeployExtension>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Auto\Microsoft.Internal.VisualStudio.Shell.Interop\Interfaces.cs">
+      <Link>Microsoft.Internal.VisualStudio.Shell.Interop\Interfaces.cs</Link>
+    </Compile>
+    <Compile Include="..\Auto\Microsoft.VisualStudio.Shell.Interop\FontAndColorDefaultsBase.cs">
+      <Link>Microsoft.VisualStudio.Shell.Interop\FontAndColorDefaultsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Auto\Microsoft.VisualStudio.Shell.Interop\FontAndColorRegistrationAttribute.cs">
+      <Link>Microsoft.VisualStudio.Shell.Interop\FontAndColorRegistrationAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\Auto\Microsoft.VisualStudio.Shell.Interop\FontResourceKey.cs">
+      <Link>Microsoft.VisualStudio.Shell.Interop\FontResourceKey.cs</Link>
+    </Compile>
+    <Compile Include="..\Auto\Microsoft.VisualStudio.Shell.Interop\Services.cs">
+      <Link>Microsoft.VisualStudio.Shell.Interop\Services.cs</Link>
+    </Compile>
+    <Compile Include="..\Auto\Microsoft.VisualStudio.Shell.Interop\ThemeColorsBase.cs">
+      <Link>Microsoft.VisualStudio.Shell.Interop\ThemeColorsBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Auto\Microsoft.VisualStudio.Shell.Interop\VsColor.cs">
+      <Link>Microsoft.VisualStudio.Shell.Interop\VsColor.cs</Link>
+    </Compile>
+    <Compile Include="..\Lite\Properties\Common.cs">
+      <Link>Properties\Common.cs</Link>
+    </Compile>
+    <Compile Include="Colorer\Input\FormatDefinitions.cs" />
+    <Compile Include="Colorer\Input\Utilities.cs" />
+    <Compile Include="Colorer\Input\HighlightTagger.cs" />
+    <Compile Include="Colorer\Input\VersionTrackingTagger.cs" />
+    <Compile Include="Colorer\Input\RegexTagger.cs" />
+    <Compile Include="Colorer\Input\ObjectInfo.cs" />
+    <Compile Include="Colorer\Input\HighlightTaggerProvider.cs" />
+    <Compile Include="Colorer\Input\RegexTaggerProvider.cs" />
+    <Compile Include="Colorer\Pattern\FormatDefinitions.cs" />
+    <Compile Include="Colorer\Pattern\PatternClassifier.cs" />
+    <Compile Include="Colorer\Pattern\PatternClassifierProvider.cs" />
+    <Compile Include="Colorer\Replacement\ReplacementClassifier.cs" />
+    <Compile Include="Colorer\Replacement\ReplacementClassifierProvider.cs" />
+    <Compile Include="Colorer\Replacement\FormatDefinitions.cs" />
+    <Compile Include="IFontAndColorDefaultsProvider.cs" />
+    <Compile Include="Parser\Pattern\Parser.cs" />
+    <Compile Include="Parser\Pattern\ParserRunner.cs" />
+    <Compile Include="Parser\Pattern\ParserRunnerProvider.cs" />
+    <Compile Include="Parser\Pattern\Token.cs" />
+    <Compile Include="Parser\Pattern\TokenKind.cs" />
+    <Compile Include="Parser\Replacement\Token.cs" />
+    <Compile Include="Parser\Replacement\TokenKind.cs" />
+    <Compile Include="Shell\FontAndColorDefaultsResultsGrid.cs" />
+    <Compile Include="Shell\FontAndColorDefaultsResultsTree.cs" />
+    <Compile Include="Shell\FontAndColorDefaultsResultsText.cs" />
+    <Compile Include="UI\ContentTypes.cs" />
+    <Compile Include="Parser\Replacement\Parser.cs" />
+    <Compile Include="Parser\Replacement\ParserRunner.cs" />
+    <Compile Include="Parser\Replacement\ParserRunnerProvider.cs" />
+    <Compile Include="UI\Generators\CodeTemplateBase.cs" />
+    <Compile Include="UI\ViewModel\CaptureNode.cs" />
+    <Compile Include="UI\ViewModel\ExecutionState.cs" />
+    <Compile Include="UI\ViewModel\GroupNode.cs" />
+    <Compile Include="UI\ViewModel\InputFragment.cs" />
+    <Compile Include="UI\ViewModel\InputFragments.cs" />
+    <Compile Include="UI\ViewModel\Line.cs" />
+    <Compile Include="UI\ViewModel\LineFragment.cs" />
+    <Compile Include="UI\ViewModel\LineFragments.cs" />
+    <Compile Include="UI\ViewModel\LineNode.cs" />
+    <Compile Include="UI\ViewModel\LineReplacement.cs" />
+    <Compile Include="UI\ViewModel\LineReplacements.cs" />
+    <Compile Include="UI\ViewModel\MatchNode.cs" />
+    <Compile Include="UI\ViewModel\ResultsViewModel.cs" />
+    <Compile Include="UI\ViewModel\TextToken.cs" />
+    <Compile Include="UI\View\GridColors.cs" />
+    <Compile Include="UI\View\ResultsControl.xaml.cs">
+      <DependentUpon>ResultsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\View\RowDefinitionEx.cs" />
+    <Compile Include="UI\View\TesterModeConverter.cs" />
+    <Compile Include="UI\View\TreeColors.cs" />
+    <Compile Include="UI\View\TextColors.cs" />
+    <Compile Include="UI\View\TextControl.xaml.cs">
+      <DependentUpon>TextControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\View\NodeRun.cs" />
+    <Compile Include="UI\View\TreeControl.xaml.cs">
+      <DependentUpon>TreeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\View\TreeViewItemConverter.cs" />
+    <Compile Include="UI\View\RegexMethodConverter.cs" />
+    <Compile Include="UI\ViewModel\Extensions.cs" />
+    <Compile Include="UI\Model\TesterMode.cs" />
+    <Compile Include="UI\EditorWrapper.cs" />
+    <Compile Include="UI\EditorToolWindow.cs" />
+    <Compile Include="UI\Model\RegexMethod.cs" />
+    <Compile Include="UI\EditorServices.cs" />
+    <Compile Include="UI\ViewModel\Node.cs" />
+    <Compile Include="UI\ViewModel\Segment.cs" />
+    <Compile Include="UI\Generators\CsCodeTemplate.cs">
+      <DependentUpon>CsCodeTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="UI\Generators\CsCodeTemplate.Custom.cs">
+      <DependentUpon>CsCodeTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ViewModel\RegexRunner.cs" />
+    <Compile Include="UI\ViewModel\EditorViewModel.cs" />
+    <Compile Include="UI\ViewModel\IOptions.cs" />
+    <Compile Include="UI\Generators\TextTemplateBase.cs" />
+    <Compile Include="UI\Generators\VbCodeTemplate.cs">
+      <DependentUpon>VbCodeTemplate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="UI\Generators\VbCodeTemplate.Custom.cs">
+      <DependentUpon>VbCodeTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ViewModel\ViewModelBase.cs" />
+    <Compile Include="UI\View\EditorControl.xaml.cs">
+      <DependentUpon>EditorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EditorPackage.cs" />
+    <Compile Include="UI\View\GridControl.xaml.cs">
+      <DependentUpon>GridControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MenuIcons.png" />
+    <Content Include="UI\Generators\CsCodeTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CsCodeTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="UI\Generators\VbCodeTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>VbCodeTemplate.cs</LastGenOutput>
+    </Content>
+    <VSCTCompile Include="EditorPackage.vsct">
+      <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
+    </VSCTCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="VSPackage.resx">
+      <MergeWithCTO>true</MergeWithCTO>
+      <ManifestResourceName>VSPackage</ManifestResourceName>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Properties\DesignTimeResources.xaml" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+    </Page>
+    <Page Include="UI\View\EditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\View\GridControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\View\ResultsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\View\TextControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\View\TreeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AsyncUsageAnalyzers">
+      <Version>1.0.0-alpha003</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.ComponentModelHost">
+      <Version>15.8.525</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Editor">
+      <Version>15.8.525</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.SDK.Analyzers">
+      <Version>16.7.9</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.SDK.EmbedInteropTypes">
+      <Version>15.0.36</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Shell.15.0">
+      <Version>15.9.28307</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.TextManager.Interop.10.0">
+      <Version>10.0.30320</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Threading">
+      <Version>15.8.209</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers">
+      <Version>16.8.55</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VSSDK.BuildTools">
+      <Version>15.9.3039</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>9.0.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

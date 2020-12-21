@@ -1,0 +1,345 @@
+﻿<UserControl
+    x:Class="Losenkov.RegexEditor.UI.View.TreeControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cm="clr-namespace:System.ComponentModel;assembly=PresentationFramework"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+    xmlns:v="clr-namespace:Losenkov.RegexEditor.UI.View"
+    xmlns:vm="clr-namespace:Losenkov.RegexEditor.UI.ViewModel"
+    d:DataContext="{x:Static vm:ResultsViewModel.SampleTree}"
+    d:DesignHeight="600"
+    d:DesignWidth="400"
+    UseLayoutRounding="True"
+    mc:Ignorable="d po">
+    <UserControl.Resources>
+        <v:TreeViewItemConverter x:Key="TreeViewItemConverter" />
+        <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="{Binding RelativeSource={RelativeSource Self}, Path=(cm:DesignerProperties.IsInDesignMode)}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.DocumentForegroundBrushKey}}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                        <StackPanel Orientation="Vertical">
+                            <Border
+                                x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                <StackPanel Margin="{Binding Converter={StaticResource TreeViewItemConverter}, ConverterParameter=margin, RelativeSource={RelativeSource TemplatedParent}}" Orientation="Horizontal">
+                                    <ToggleButton
+                                        x:Name="Expander"
+                                        ClickMode="Press"
+                                        IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
+                                        Foreground="{TemplateBinding Foreground}">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="{x:Type ToggleButton}">
+                                                <Setter Property="Focusable" Value="False" />
+                                                <Setter Property="Width" Value="16" />
+                                                <Setter Property="Height" Value="16" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                            <Border
+                                                                Width="16"
+                                                                Height="16"
+                                                                Background="Transparent">
+                                                                <Path
+                                                                    x:Name="ExpandPath"
+                                                                    Data="M6.5,4.5 L10,8 L6.5,11.5 z"
+                                                                    Fill="{TemplateBinding Foreground}"
+                                                                    SnapsToDevicePixels="True" />
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsChecked" Value="True">
+                                                                    <Setter TargetName="ExpandPath" Property="RenderTransform">
+                                                                        <Setter.Value>
+                                                                            <RotateTransform Angle="90" CenterX="8" CenterY="8" />
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                    <Border
+                                        x:Name="Marker"
+                                        Width="16"
+                                        Height="16"
+                                        Visibility="Collapsed">
+                                        <Path
+                                            Data="M5.5,5.5 L5.5,10.5 L10.5,10.5 L10.5,5.5 z"
+                                            Fill="{TemplateBinding Foreground}"
+                                            SnapsToDevicePixels="True" />
+                                    </Border>
+                                    <Border
+                                        Grid.Column="1"
+                                        Padding="{TemplateBinding Padding}"
+                                        SnapsToDevicePixels="True">
+                                        <ContentPresenter
+                                            x:Name="PART_Header"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            Content="{TemplateBinding Header}"
+                                            ContentSource="Header"
+                                            ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                                            ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                            <ItemsPresenter x:Name="ItemsHost" />
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded" Value="False">
+                                <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="HasItems" Value="False">
+                                <Setter TargetName="Expander" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="Marker" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static v:TreeColors.ActiveSelectionBackgroundBrushKey}}" />
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.ActiveSelectionForegroundBrushKey}}" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="True" />
+                                    <Condition Property="IsSelectionActive" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static v:TreeColors.InactiveSelectionBackgroundBrushKey}}" />
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.InactiveSelectionForegroundBrushKey}}" />
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="NodeTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,0,1" />
+        </Style>
+        <Style x:Key="NodeToolTipTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+        <Style
+            x:Key="NodeRun-NodeHeader-Style"
+            po:Freeze="true"
+            TargetType="Run">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=IsSelected}" Value="True" />
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=IsSelectionActive}" Value="True" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.ActiveSelectionForegroundBrushKey}}" />
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style
+            x:Key="NodeRun-LineNode-NodeHeader-Style"
+            po:Freeze="true"
+            TargetType="Run"
+            BasedOn="{StaticResource NodeRun-NodeHeader-Style}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.LineNodeHeaderForegroundBrushKey}}" />
+        </Style>
+        <Style
+            x:Key="NodeRun-MatchNode-NodeHeader-Style"
+            po:Freeze="true"
+            TargetType="Run"
+            BasedOn="{StaticResource NodeRun-NodeHeader-Style}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.MatchNodeHeaderForegroundBrushKey}}" />
+        </Style>
+        <Style
+            x:Key="NodeRun-GroupNode-NodeHeader-Style"
+            po:Freeze="true"
+            TargetType="Run"
+            BasedOn="{StaticResource NodeRun-NodeHeader-Style}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.GroupNodeHeaderForegroundBrushKey}}" />
+        </Style>
+        <Style
+            x:Key="NodeRun-CaptureNode-NodeHeader-Style"
+            po:Freeze="true"
+            TargetType="Run"
+            BasedOn="{StaticResource NodeRun-NodeHeader-Style}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.CaptureNodeHeaderForegroundBrushKey}}" />
+        </Style>
+        <Style x:Key="NodeRun-NodeText-Style" TargetType="{x:Type v:NodeRun}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.DocumentForegroundBrushKey}}" />
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=IsSelected}" Value="True" />
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=IsSelectionActive}" Value="False" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.InactiveSelectionForegroundBrushKey}}" />
+                </MultiDataTrigger>
+                <Trigger Property="Mode" Value="Empty">
+                    <Setter Property="FontStyle" Value="Italic" />
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.EmptyMarkerForegroundBrushKey}}" />
+                </Trigger>
+                <Trigger Property="Mode" Value="Failure">
+                    <Setter Property="FontStyle" Value="Italic" />
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.FailureMarkerForegroundBrushKey}}" />
+                </Trigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=IsSelected}" Value="True" />
+                        <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=IsSelectionActive}" Value="True" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.ActiveSelectionForegroundBrushKey}}" />
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="NodeRun-TooltipHeader-Style" TargetType="{x:Type v:NodeRun}">
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style
+            x:Key="NodeRun-TooltipSuccess-Style"
+            BasedOn="{StaticResource NodeRun-TooltipHeader-Style}"
+            TargetType="{x:Type v:NodeRun}">
+            <Setter Property="Text" Value="success" />
+            <Style.Triggers>
+                <Trigger Property="Mode" Value="Failure">
+                    <Setter Property="Text" Value="failure" />
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.FailureMarkerForegroundBrushKey}}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="NodeRun-TooltipText-Style" TargetType="{x:Type v:NodeRun}">
+            <Style.Triggers>
+                <Trigger Property="Mode" Value="Empty">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:TreeColors.EmptyMarkerForegroundBrushKey}}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <HierarchicalDataTemplate DataType="{x:Type vm:LineNode}" ItemsSource="{Binding Matches}">
+            <TextBlock Style="{StaticResource NodeTextBlockStyle}">
+                <TextBlock.ToolTip>
+                    <TextBlock Style="{StaticResource NodeToolTipTextBlockStyle}">
+                        <v:NodeRun
+                            Aspect="TooltipHeader"
+                            Node="{Binding}"
+                            Style="{StaticResource NodeRun-TooltipHeader-Style}" />
+                        <LineBreak />
+                        <v:NodeRun
+                            Aspect="TooltipText"
+                            Node="{Binding}"
+                            Style="{StaticResource NodeRun-TooltipText-Style}" />
+                    </TextBlock>
+                </TextBlock.ToolTip>
+                <v:NodeRun
+                    Aspect="NodeHeader"
+                    Node="{Binding}"
+                    Style="{StaticResource NodeRun-LineNode-NodeHeader-Style}" />
+                <v:NodeRun
+                    Aspect="NodeText"
+                    Node="{Binding}"
+                    Style="{StaticResource NodeRun-NodeText-Style}" />
+            </TextBlock>
+        </HierarchicalDataTemplate>
+        <HierarchicalDataTemplate DataType="{x:Type vm:MatchNode}" ItemsSource="{Binding Groups}">
+            <TextBlock Margin="0,0,0,1" Style="{StaticResource NodeTextBlockStyle}">
+                <TextBlock.ToolTip>
+                    <TextBlock Style="{StaticResource NodeToolTipTextBlockStyle}">
+                        <v:NodeRun
+                            Aspect="TooltipHeader"
+                            Node="{Binding}"
+                            Style="{StaticResource NodeRun-TooltipHeader-Style}" />
+                        <Run Text="-" />
+                        <v:NodeRun Node="{Binding}" Style="{StaticResource NodeRun-TooltipSuccess-Style}" />
+                        <LineBreak />
+                        <v:NodeRun
+                            Aspect="TooltipText"
+                            Node="{Binding}"
+                            Style="{StaticResource NodeRun-TooltipText-Style}" />
+                    </TextBlock>
+                </TextBlock.ToolTip>
+                <v:NodeRun
+                    Aspect="NodeHeader"
+                    Node="{Binding}"
+                    Style="{StaticResource NodeRun-MatchNode-NodeHeader-Style}" />
+                <v:NodeRun
+                    Aspect="NodeText"
+                    Node="{Binding}"
+                    Style="{StaticResource NodeRun-NodeText-Style}" />
+            </TextBlock>
+        </HierarchicalDataTemplate>
+        <HierarchicalDataTemplate DataType="{x:Type vm:GroupNode}" ItemsSource="{Binding Captures}">
+            <TextBlock Style="{StaticResource NodeTextBlockStyle}">
+                <TextBlock.ToolTip>
+                    <TextBlock Style="{StaticResource NodeToolTipTextBlockStyle}">
+                        <v:NodeRun
+                            Aspect="TooltipHeader"
+                            Node="{Binding}"
+                            Style="{StaticResource NodeRun-TooltipHeader-Style}" />
+                        <Run Text="-" />
+                        <v:NodeRun Node="{Binding}" Style="{StaticResource NodeRun-TooltipSuccess-Style}" />
+                        <LineBreak />
+                        <v:NodeRun
+                            Aspect="TooltipText"
+                            Node="{Binding}"
+                            Style="{StaticResource NodeRun-TooltipText-Style}" />
+                    </TextBlock>
+                </TextBlock.ToolTip>
+                <v:NodeRun
+                    Aspect="NodeHeader"
+                    Node="{Binding}"
+                    Style="{StaticResource NodeRun-GroupNode-NodeHeader-Style}" />
+                <v:NodeRun
+                    Aspect="NodeText"
+                    Node="{Binding}"
+                    Style="{StaticResource NodeRun-NodeText-Style}" />
+            </TextBlock>
+        </HierarchicalDataTemplate>
+        <DataTemplate DataType="{x:Type vm:CaptureNode}">
+            <TextBlock Style="{StaticResource NodeTextBlockStyle}">
+                <TextBlock.ToolTip>
+                    <TextBlock Style="{StaticResource NodeToolTipTextBlockStyle}">
+                        <v:NodeRun
+                            Aspect="TooltipHeader"
+                            Node="{Binding}"
+                            Style="{StaticResource NodeRun-TooltipHeader-Style}" />
+                        <LineBreak />
+                        <v:NodeRun
+                            Aspect="TooltipText"
+                            Node="{Binding}"
+                            Style="{StaticResource NodeRun-TooltipText-Style}" />
+                    </TextBlock>
+                </TextBlock.ToolTip>
+                <v:NodeRun
+                    Aspect="NodeHeader"
+                    Node="{Binding}"
+                    Style="{StaticResource NodeRun-CaptureNode-NodeHeader-Style}" />
+                <v:NodeRun
+                    Aspect="NodeText"
+                    Node="{Binding}"
+                    Style="{StaticResource NodeRun-NodeText-Style}" />
+            </TextBlock>
+        </DataTemplate>
+    </UserControl.Resources>
+    <TreeView
+        x:Name="treeView"
+        Background="{DynamicResource {x:Static v:TreeColors.DocumentBackgroundBrushKey}}"
+        BorderThickness="0"
+        FontFamily="{DynamicResource {x:Static v:TreeColors.FontFamilyKey}}"
+        FontSize="{DynamicResource {x:Static v:TreeColors.FontSizeKey}}"
+        FontStyle="Normal"
+        FontWeight="Normal"
+        Foreground="{DynamicResource {x:Static v:TreeColors.DocumentForegroundBrushKey}}"
+        ItemContainerStyle="{StaticResource TreeViewItemStyle}"
+        ItemsSource="{Binding}">
+        <TreeView.ContextMenu>
+            <ContextMenu>
+                <MenuItem Click="CollapseAll_Click" Header="Collapse All" />
+                <MenuItem Click="ExpandAll_Click" Header="Expand All" />
+            </ContextMenu>
+        </TreeView.ContextMenu>
+    </TreeView>
+</UserControl>

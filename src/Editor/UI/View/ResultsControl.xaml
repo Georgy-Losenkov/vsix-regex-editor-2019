@@ -1,0 +1,68 @@
+﻿<UserControl
+    x:Class="Losenkov.RegexEditor.UI.View.ResultsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:v="clr-namespace:Losenkov.RegexEditor.UI.View"
+    xmlns:vm="clr-namespace:Losenkov.RegexEditor.UI.ViewModel"
+    d:DesignHeight="400"
+    d:DesignWidth="600"
+    mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:ResultsViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <Border>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding GridVisible}" Value="true">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <v:GridControl
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                DataContext="{Binding Grid, Mode=OneWay}"
+                Grid.ZIndex="2" />
+        </Border>
+        <Border>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding TextVisible}" Value="true">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <v:TextControl
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                DataContext="{Binding Text, Mode=OneWay}"
+                Grid.ZIndex="3" />
+        </Border>
+        <Border>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding TreeVisible}" Value="true">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <v:TreeControl
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                DataContext="{Binding Tree, Mode=OneWay}"
+                Grid.ZIndex="4" />
+        </Border>
+    </Grid>
+</UserControl>
