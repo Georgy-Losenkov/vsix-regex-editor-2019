@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable"
+              xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              >
+
+    <!--  This is the file that defines the actual layout and type of the commands.
+        It is divided in different sections (e.g. command definition, command
+        placement, ...), with each defining a specific set of properties.
+        See the comment before each section for more details about how to
+        use it. -->
+
+    <!--  The VSCT compiler (the tool that translates this file into the binary
+        format that VisualStudio will consume) has the ability to run a preprocessor
+        on the vsct file; this preprocessor is (usually) the C++ preprocessor, so
+        it is possible to define includes and macros with the same syntax used
+        in C++ files. Using this ability of the compiler here, we include some files
+        defining some of the constants that we will use inside the file. -->
+
+    <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+    <Extern href="stdidcmd.h" />
+
+    <!--This header contains the command ids for the menus provided by the shell. -->
+    <Extern href="vsshlids.h" />
+
+    <!--The Commands section is where commands, menus, and menu groups are defined.
+      This section uses a Guid to identify the package that provides the command defined inside it. -->
+    <Commands package="guidAutoPackage">
+        <!-- Inside this section we have different sub-sections: one for the menus, another
+             for the menu groups, one for the buttons (the actual commands), one for the combos
+             and the last one for the bitmaps used. Each element is identified by a command id that
+             is a unique pair of guid and numeric identifier; the guid part of the identifier is usually
+             called "command set" and is used to group different command inside a logically related
+             group; your package should define its own command set in order to avoid collisions
+             with command ids defined by other packages. -->
+
+        <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
+        <Bitmaps>
+            <!--  The bitmap id is defined in a way that is a little bit different from the others:
+                  the declaration starts with a guid for the bitmap strip, then there is the resource id of the
+                  bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
+                  inside a button definition. An important aspect of this declaration is that the element id
+                  must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
+            <Bitmap guid="guidImages" href="Resources\MenuIcons.png" usedList="bmpNewEditor, bmpIntHelp, bmpExtHelp, bmpQuickRef, bmpQuickStart" />
+        </Bitmaps>
+
+
+        <!--Buttons section. -->
+        <!--This section defines the elements the user can interact with, like a menu command or a button
+        or combo box in a toolbar. -->
+        <Buttons>
+            <!-- To define a menu group you have to specify its ID, the parent menu and its display priority.
+                 The command is visible and enabled by default. If you need to change the visibility, status, etc, you can use
+                 the CommandFlag node.
+                 You can add more than one CommandFlag node e.g.:
+                     <CommandFlag>DefaultInvisible</CommandFlag>
+                     <CommandFlag>DynamicVisibility</CommandFlag>
+                 If you do not want an image next to your command, remove the Icon node /> -->
+            <!-- button placed into menu Regex Editor -->
+            <Button guid="guidAutoCmdSet" id="cmdidOpenQuickRef" priority="0x0100" type="Button">
+                <Parent guid="guidLiteCmdSet" id="menuRegexEditorGroupHelp" />
+                <Icon guid="guidImages" id="bmpQuickRef" />
+                <Strings>
+                    <ButtonText>View Quick Reference Pane</ButtonText>
+                </Strings>
+            </Button>
+            <Button guid="guidAutoCmdSet" id="cmdidOpenQuickStart" priority="0x0101" type="Button">
+                <Parent guid="guidLiteCmdSet" id="menuRegexEditorGroupHelp" />
+                <Icon guid="guidImages" id="bmpQuickStart" />
+                <Strings>
+                    <ButtonText>View Quick Start</ButtonText>
+                </Strings>
+            </Button>
+            <!-- button placed into menu Regex Editor -->
+            <Button guid="guidAutoCmdSet" id="cmdidOpenPage1" priority="0x0102" type="Button">
+                <Parent guid="guidLiteCmdSet" id="menuRegexEditorGroupHelp" />
+                <Icon guid="guidImages" id="bmpExtHelp" />
+                <Strings>
+                    <ButtonText>.NET Framework Regular Expressions</ButtonText>
+                </Strings>
+            </Button>
+            <!-- button placed into menu Regex Editor -->
+            <Button guid="guidAutoCmdSet" id="cmdidOpenPage2" priority="0x0103" type="Button">
+                <Parent guid="guidLiteCmdSet" id="menuRegexEditorGroupHelp" />
+                <Icon guid="guidImages" id="bmpExtHelp" />
+                <Strings>
+                    <ButtonText>.NET Framework Regular Expressions Language</ButtonText>
+                </Strings>
+            </Button>
+            <!-- button placed into menu Regex Editor -->
+            <Button guid="guidAutoCmdSet" id="cmdidOpenPage3" priority="0x0104" type="Button">
+                <Parent guid="guidLiteCmdSet" id="menuRegexEditorGroupHelp" />
+                <Icon guid="guidImages" id="bmpExtHelp" />
+                <Strings>
+                    <ButtonText>.NET Framework Regular Expressions Source Code</ButtonText>
+                </Strings>
+            </Button>
+        </Buttons>
+    </Commands>
+
+    <Symbols>
+        <!-- This is the package guid. -->
+        <GuidSymbol name="guidAutoPackage" value="{f8e44e7a-2db5-4917-8cac-bfab9dfcc5f6}" />
+
+        <!-- This is the guid used to group the menu commands together -->
+        <GuidSymbol name="guidLiteCmdSet" value="{580d96c9-c729-4e15-be6a-02d314275ece}">
+            <IDSymbol name="menuToolsGroupRegexEditor" value="4128" />
+            <IDSymbol name="menuRegexEditor" value="4129" />
+            <IDSymbol name="menuRegexEditorGroupEditor" value="4130" />
+            <IDSymbol name="menuRegexEditorGroupHelp" value="4131" />
+        </GuidSymbol>
+
+        <!-- This is the guid used to group the menu commands together -->
+        <GuidSymbol name="guidAutoCmdSet" value="{42187349-3f00-4738-b46a-f2db44fc70e2}">
+            <IDSymbol name="cmdidOpenPage1" value="256" />
+            <IDSymbol name="cmdidOpenPage2" value="257" />
+            <IDSymbol name="cmdidOpenPage3" value="258" />
+            <IDSymbol name="cmdidOpenQuickRef" value="259" />
+            <IDSymbol name="cmdidOpenQuickStart" value="260" />
+        </GuidSymbol>
+
+        <GuidSymbol name="guidImages" value="{3859083a-f702-4bdb-bf0a-aae13d40f223}">
+            <IDSymbol name="bmpNewEditor" value="1" />
+            <IDSymbol name="bmpIntHelp" value="2" />
+            <IDSymbol name="bmpExtHelp" value="3" />
+            <IDSymbol name="bmpQuickRef" value="4" />
+            <IDSymbol name="bmpQuickStart" value="5" />
+        </GuidSymbol>
+    </Symbols>
+</CommandTable>

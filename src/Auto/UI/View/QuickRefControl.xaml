@@ -1,0 +1,1438 @@
+﻿<UserControl x:Class="Losenkov.RegexEditor.UI.View.QuickRefControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:re="clr-namespace:Losenkov.RegexEditor.UI"
+             xmlns:v="clr-namespace:Losenkov.RegexEditor.UI.View"
+             mc:Ignorable="d"
+             d:DesignHeight="800" d:DesignWidth="450">
+    <FlowDocumentScrollViewer IsInactiveSelectionHighlightEnabled="True"
+                              IsManipulationEnabled="True"
+                              >
+        <FlowDocument FontFamily="{DynamicResource {x:Static v:QuickRefColors.FontFamilyKey}}"
+                      FontSize="{DynamicResource {x:Static v:QuickRefColors.FontSizeKey}}"
+                      Background="{DynamicResource {x:Static v:QuickRefColors.DocumentBackgroundBrushKey}}"
+                      Foreground="{DynamicResource {x:Static v:QuickRefColors.DocumentForegroundBrushKey}}"
+                      PagePadding="8,12"
+                      >
+            <FlowDocument.Resources>
+                <re:EmWidthEvaluator x:Key="width-evaluator" 
+                                     FontFamily="{DynamicResource {x:Static v:QuickRefColors.FontFamilyKey}}"
+                                     FontSize="{DynamicResource {x:Static v:QuickRefColors.FontSizeKey}}"
+                                     FontStretch="Normal"
+                                     FontStyle="Italic"
+                                     FontWeight="Bold" />
+                <re:ColumnWidthConverter x:Key="column-width-converter" />
+                <Style x:Key="{x:Type Table}" TargetType="{x:Type Table}">
+                    <Setter Property="CellSpacing" Value="0" />
+                </Style>
+                <Style x:Key="{x:Type TableCell}" TargetType="{x:Type TableCell}">
+                    <Setter Property="Padding" Value="1,1" />
+                </Style>
+                <Style x:Key="{x:Type Paragraph}" TargetType="{x:Type Paragraph}">
+                    <Setter Property="TextAlignment" Value="Left" />
+                </Style>
+                <Style x:Key="row-odd" TargetType="{x:Type TableRow}">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static v:QuickRefColors.OddRowBackgroundBrushKey}}" /> <!-- #e0f0e0 -->
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:QuickRefColors.OddRowForegroundBrushKey}}" />
+                </Style>
+                <Style x:Key="row-even" TargetType="{x:Type TableRow}">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static v:QuickRefColors.EvenRowBackgroundBrushKey}}" />
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:QuickRefColors.EvenRowForegroundBrushKey}}" />
+                </Style>
+                <Style x:Key="row-head" TargetType="{x:Type TableRow}">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static v:QuickRefColors.HeadRowBackgroundBrushKey}}" /> <!-- #80A080 -->
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:QuickRefColors.HeadRowForegroundBrushKey}}" /> <!-- White -->
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style>
+                <Style x:Key="code" TargetType="{x:Type TextElement}">
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style>
+                <Style x:Key="arg-odd" TargetType="{x:Type Run}">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static v:QuickRefColors.OddRowArgBackgroundBrushKey}}" />
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:QuickRefColors.OddRowArgForegroundBrushKey}}" />
+                    <Setter Property="FontWeight" Value="Normal" />
+                    <Setter Property="FontStyle" Value="Italic" />
+                </Style>
+                <Style x:Key="arg-even" TargetType="{x:Type Run}">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static v:QuickRefColors.EvenRowArgBackgroundBrushKey}}" />
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static v:QuickRefColors.EvenRowArgForegroundBrushKey}}" />
+                    <Setter Property="FontWeight" Value="Normal" />
+                    <Setter Property="FontStyle" Value="Italic" />
+                </Style>
+                <Style x:Key="column-8" TargetType="{x:Type TableColumn}">
+                    <Setter Property="Width" Value="{Binding Source={StaticResource width-evaluator}, Path=EmWidth, Converter={StaticResource column-width-converter}, ConverterParameter=8}" />
+                </Style>
+                <Style x:Key="column-10" TargetType="{x:Type TableColumn}">
+                    <Setter Property="Width" Value="{Binding Source={StaticResource width-evaluator}, Path=EmWidth, Converter={StaticResource column-width-converter}, ConverterParameter=10}" />
+                </Style>
+                <Style x:Key="column-14" TargetType="{x:Type TableColumn}">
+                    <Setter Property="Width" Value="{Binding Source={StaticResource width-evaluator}, Path=EmWidth, Converter={StaticResource column-width-converter}, ConverterParameter=14}" />
+                </Style>
+            </FlowDocument.Resources>
+            <re:CollapsibleSection HeaderText="SINGLE CHARACTERS"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/character-escapes-in-regular-expressions"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-8}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{StaticResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To match any character</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    [<Run Style="{StaticResource arg-odd}" Text="set" />]
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>In that set</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    [^<Run Style="{StaticResource arg-even}" Text="set"/>]
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Not in that set</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    [<Run Style="{StaticResource arg-odd}" Text="a-z"/>]
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>In the a-z range</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    [^<Run Style="{StaticResource arg-even}" Text="a-z"/>]
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Not in the a-z range</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">.</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Any except \n (new line)</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    \<Run Style="{StaticResource arg-even}" Text="char" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Escaped special character</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="CONTROL CHARACTERS"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/character-escapes-in-regular-expressions"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-8}" />
+                        <TableColumn Style="{StaticResource column-8}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Or</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To match</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\t</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\u0009</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Horizontal tab</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\v</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\u000B</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Vertical tab</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\b</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\u0008</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Backspace</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\e</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\u001B</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Escape</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\r</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\u000D</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Carriage return</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\f</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\u000C</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Form feed</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\n</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\u000A</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>New line</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\a</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\u0007</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Bell (alarm)</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    \c<Run Style="{StaticResource arg-odd}" Text="char" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>ASCII control character</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="NON-ASCII CODES"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/character-escapes-in-regular-expressions"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-8}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To match character with</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    \<Run Style="{StaticResource arg-odd}" Text="octal" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>2-3 digit octal character code</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    \x<Run Style="{StaticResource arg-even}" Text="hex" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>2-digit hex character code</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    \u<Run Style="{StaticResource arg-odd}" Text="hex" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>4-digit hex character code</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="CHARACTER CLASSES"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/character-classes-in-regular-expressions"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-8}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To match any character</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    \p{<Run Style="{StaticResource arg-odd}" Text="cat" />}
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>In that Unicode category or block</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    \P{<Run Style="{StaticResource arg-even}" Text="cat" />}
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Not in that Unicode category or block</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\w</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Word character</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\W</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Non-word character</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\d</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Decimal digit</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\D</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Not a decimal digit</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\s</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>White-space character</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\S</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Non-white-space char</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="GREEDY QUANTIFIERS"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/quantifiers-in-regular-expressions"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-8}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To match</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">*</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>0 or more times</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">+</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>1 or more times</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">?</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>0 or 1 time</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    {<Run Style="{StaticResource arg-even}" Text="n" />}
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    Exactly <Run Style="{StaticResource arg-even}" Text="n" /> times
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    {<Run Style="{StaticResource arg-odd}" Text="n" />,}
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    At least <Run Style="{StaticResource arg-odd}" Text="n" /> times
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    {<Run Style="{StaticResource arg-even}" Text="n" />,<Run Style="{StaticResource arg-even}" Text="m" />}
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    From
+                                    <Run Style="{StaticResource arg-even}" Text="n" /> to
+                                    <Run Style="{StaticResource arg-even}" Text="m" /> times
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="LAZY QUANTIFIERS"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/quantifiers-in-regular-expressions"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-8}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To match</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">*?</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>0 or more times</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">+?</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>1 or more times</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">??</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>0 or 1 time</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    {<Run Style="{StaticResource arg-even}" Text="n" />}?
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    Exactly <Run Style="{StaticResource arg-even}" Text="n" /> times
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    {<Run Style="{StaticResource arg-odd}" Text="n" />,}?
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    At least <Run Style="{StaticResource arg-odd}" Text="n" /> times
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    {<Run Style="{StaticResource arg-even}" Text="n" />,<Run Style="{StaticResource arg-even}" Text="m" />}?
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    From
+                                    <Run Style="{StaticResource arg-even}" Text="n" /> to
+                                    <Run Style="{StaticResource arg-even}" Text="m" /> times
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="ANCHORS"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/anchors-in-regular-expressions"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-8}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To specify position</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">^</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>At start of string or line</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\A</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>At start of string</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\z</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>At end of string</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\Z</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>At end (or before \n at end) of string</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">$</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>At end (or before \n at end) of string or line</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\G</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Where previous match ended</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\b</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>On word boundary</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">\B</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Not on word boundary</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="GROUPS"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/grouping-constructs-in-regular-expressions"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-14}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To define</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (<Run Style="{StaticResource arg-odd}" Text="exp"/>)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Indexed group</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (&lt;<Run Style="{StaticResource arg-even}" Text="name"/>&gt;<Run Style="{StaticResource arg-even}" Text="exp"/>)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Named group</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell ColumnSpan="2">
+                                <Paragraph Style="{StaticResource code}">
+                                    (&lt;<Run Style="{StaticResource arg-odd}" Text="name1"/>-<Run Style="{StaticResource arg-odd}" Text="name2"/>&gt;<Run Style="{StaticResource arg-odd}" Text="exp"/>)
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell />
+                            <TableCell>
+                                <Paragraph>Balancing group</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?:<Run Style="{StaticResource arg-even}" Text="exp"/>)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Noncapturing group</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?=<Run Style="{StaticResource arg-odd}" Text="exp"/>)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Zero-width positive lookahead</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?!<Run Style="{StaticResource arg-even}" Text="exp"/>)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Zero-width negative lookahead</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?&lt;=<Run Style="{StaticResource arg-odd}" Text="exp"/>)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Zero-width positive lookbehind</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?&lt;!<Run Style="{StaticResource arg-even}" Text="exp"/>)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Zero-width negative lookbehind</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?&gt;<Run Style="{StaticResource arg-odd}" Text="exp"/>)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Non-backtracking (greedy)</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="INLINE OPTIONS"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/miscellaneous-constructs-in-regular-expressions#inline-options"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-14}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Option</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Effect on match</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">i</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Case-insensitive</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">m</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Multiline mode</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">n</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Explicit (named)</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">s</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Single-line mode</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">x</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Ignore white space</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-14}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">(?imnsx)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Set the specified options</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">(?-imnsx)</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Disable the specified options</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?imnsx:<Run Style="{StaticResource arg-odd}" Text="exp"/>)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Set the specified options within the expression</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?-imnsx:<Run Style="{StaticResource arg-even}" Text="exp"/>)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Disable the specified options within the expression</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="BACKREFERENCES"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/backreference-constructs-in-regular-expressions"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-10}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To match</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    \<Run Style="{StaticResource arg-odd}" Text="n" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Indexed group</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    \k&lt;<Run Style="{StaticResource arg-even}" Text="name" />&gt;
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Named group</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="ALTERNATIONS"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/alternation-constructs-in-regular-expressions"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-14}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To match</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?<Run Style="{StaticResource arg-odd}" Text="a" />|<Run Style="{StaticResource arg-odd}" Text="b" />)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Either a or b</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?(<Run Style="{StaticResource arg-even}" Text="exp" />)<Run Style="{StaticResource arg-even}" Text="a" />|<Run Style="{StaticResource arg-even}" Text="b" />)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Style="{StaticResource arg-even}" Text="a" /> if
+                                    <Run Style="{StaticResource arg-even}" Text="exp" /> is matched
+                                    <LineBreak />
+                                    <Run Style="{StaticResource arg-even}" Text="b" /> if
+                                    <Run Style="{StaticResource arg-even}" Text="exp" /> isn't matched
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?(<Run Style="{StaticResource arg-odd}" Text="name" />)<Run Style="{StaticResource arg-odd}" Text="a" />|<Run Style="{StaticResource arg-odd}" Text="b" />)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    <Run Style="{StaticResource arg-odd}" Text="a" /> if
+                                    <Run Style="{StaticResource arg-odd}" Text="name" /> is matched
+                                    <LineBreak />
+                                    <Run Style="{StaticResource arg-odd}" Text="b" /> if
+                                    <Run Style="{StaticResource arg-odd}" Text="name" /> isn't matched
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="SUBSTITUTIONS"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/substitutions-in-regular-expressions"
+                                   >
+                <Table x:Name="tableSubstitutions">
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-10}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To substitute</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    $<Run Style="{StaticResource arg-odd}" Text="n" />
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>
+                                    Substring matched by group number
+                                    <Run Style="{StaticResource arg-odd}" Text="n" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    ${<Run Style="{StaticResource arg-even}" Text="name" />}
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Substring matched by group
+                                    <Run Style="{StaticResource arg-even}" Text="name" />
+                                </Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">$$</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Literal $ character</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">$&lt;</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Copy of whole match</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">$`</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Text before the match</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">$'</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Text after the match</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">$+</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Last captured group</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">$_</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Entire input string</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="COMMENTS"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/miscellaneous-constructs-in-regular-expressions"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-14}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Use</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>To</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">
+                                    (?#<Run Style="{StaticResource arg-odd}" Text="comment" />)
+                                </Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Add inline comment</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">#</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Add x-mode comment</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+            <re:CollapsibleSection HeaderText="SUPPORTED UNICODE GENERAL CATEGORIES"
+                                   HeaderUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/character-classes-in-regular-expressions#SupportedUnicodeGeneralCategories"
+                                   >
+                <Table>
+                    <Table.Columns>
+                        <TableColumn Style="{StaticResource column-10}" />
+                        <TableColumn />
+                    </Table.Columns>
+                    <TableRowGroup>
+                        <TableRow Style="{DynamicResource row-head}">
+                            <TableCell>
+                                <Paragraph>Category</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Description</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Lu</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Letter, Uppercase</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Ll</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Letter, Lowercase</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Lt</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Letter, Titlecase</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Lm</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Letter, Modifier</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Lo</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Letter, Other</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">L</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>All letter characters. This includes the Lu, Ll, Lt, Lm, and Lo characters.</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Mn</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Mark, Nonspacing</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Mc</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Mark, Spacing Combining</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Me</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Mark, Enclosing</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">M</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>All diacritic marks. This includes the Mn, Mc, and Me categories.</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Nd</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Number, Decimal Digit</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Nl</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Number, Letter</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">No</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Number, Other</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">N</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>All numbers. This includes the Nd, Nl, and No categories.</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Pc</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Punctuation, Connector</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Pd</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Punctuation, Dash</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Ps</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Punctuation, Open</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Pe</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Punctuation, Close</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Pi</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Punctuation, Initial quote (may behave like Ps or Pe depending on usage)</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Pf</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Punctuation, Final quote (may behave like Ps or Pe depending on usage)</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Po</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Punctuation, Other</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">P</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>All punctuation characters. This includes the Pc, Pd, Ps, Pe, Pi, Pf, and Po categories.</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Sm</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Symbol, Math</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Sc</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Symbol, Currency</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Sk</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Symbol, Modifier</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">So</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Symbol, Other</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">S</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>All symbols. This includes the Sm, Sc, Sk, and So categories.</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Zs</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Separator, Space</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Zl</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Separator, Line</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Zp</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Separator, Paragraph</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Z</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>All separator characters. This includes the Zs, Zl, and Zp categories.</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Cc</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Other, Control</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Cf</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Other, Format</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Cs</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Other, Surrogate</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Co</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Other, Private Use</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-even}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">Cn</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>Other, Not Assigned (no characters have this property)</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow Style="{StaticResource row-odd}">
+                            <TableCell>
+                                <Paragraph Style="{StaticResource code}">C</Paragraph>
+                            </TableCell>
+                            <TableCell>
+                                <Paragraph>All control characters. This includes the Cc, Cf, Cs, Co, and Cn categories.</Paragraph>
+                            </TableCell>
+                        </TableRow>
+                    </TableRowGroup>
+                </Table>
+            </re:CollapsibleSection>
+        </FlowDocument>
+    </FlowDocumentScrollViewer>
+</UserControl>
