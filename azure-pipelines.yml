@@ -13,13 +13,26 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  keyFileName: 'Losenkov.snk'
 
 steps:
-- task: NuGetToolInstaller@1
-
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+
+- task: DownloadSecureFile@1
+  name: keyFile
+  inputs:
+    secureFile: '$(keyFileName)'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      Write-Output "File name: $(keyFileName)"
+      Write-Output "File name: $(keyFile.secureFilePath)"
+      Write-Output "File name: $(keyFile.myProperty)"
 
 - task: VSBuild@1
   inputs:
