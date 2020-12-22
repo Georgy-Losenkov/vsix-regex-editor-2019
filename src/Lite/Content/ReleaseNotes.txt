@@ -1,4 +1,4 @@
-﻿1.0.5 - December 06, 2020
+﻿1.0.5 - December 22, 2020
 ---------------------
 Fixed editor UI issues related to async package, namely inability to copy/paste.
 "Colored" pattern editor.
