@@ -30,9 +30,8 @@ steps:
     targetType: 'inline'
     script: |
       # Write your PowerShell commands here.
-      Write-Output "File name: $(keyFileName)"
-      Write-Output "File name: $(keyFile.secureFilePath)"
-      Write-Output "File name: $(keyFile.myProperty)"
+      Write-Output "Path : $(keyFile.secureFilePath)"
+      Write-Output "Type : $(keyFile.GetType())"
 
 - task: VSBuild@1
   inputs:
