@@ -27,6 +27,6 @@ steps:
     script: |
       # Write your PowerShell commands here.
       Write-Output "Path : $(keyFile.secureFilePath)"
-      Write-Output ($keyFile | Get-Member | ConvertTo-Json)
+      Write-Output ($(keyFile) | Get-Member | ConvertTo-Json)
       # Write-Output "Type : $(keyFile)"
       # Write-Output "Type : $(keyFile).GetType()"
