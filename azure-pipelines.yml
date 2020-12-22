@@ -31,7 +31,8 @@ steps:
     script: |
       # Write your PowerShell commands here.
       Write-Output "Path : $(keyFile.secureFilePath)"
-      Write-Output "Type : $(keyFile.GetType())"
+      Write-Output "Type : $(keyFile)"
+      Write-Output "Type : $(keyFile).GetType()"
 
 - task: VSBuild@1
   inputs:
