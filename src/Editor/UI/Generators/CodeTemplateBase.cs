@@ -14,16 +14,16 @@ namespace Losenkov.RegexEditor.UI.Generators
 
             public MethodOptions(Boolean multilineInput, Model.RegexMethod regexMethod)
             {
-                this.MultilineInput = multilineInput;
-                this.RegexMethod = regexMethod;
+                MultilineInput = multilineInput;
+                RegexMethod = regexMethod;
             }
         }
 
-        protected readonly String PatternText;
-        protected readonly String[] Options;
-        protected readonly String ReplacementText;
-        protected readonly String InputText;
-        protected readonly MethodOptions[] Methods;
+        protected String PatternText { get; }
+        protected String[] Options { get; }
+        protected String ReplacementText { get; }
+        protected String InputText { get; }
+        protected MethodOptions[] Methods { get; }
 
         internal CodeTemplateBase(
             String patternText,
@@ -33,9 +33,9 @@ namespace Losenkov.RegexEditor.UI.Generators
             Boolean? multilineInput,
             Model.RegexMethod? regexMethod)
         {
-            this.PatternText = patternText;
-            this.ReplacementText = replacementText;
-            this.InputText = inputText;
+            PatternText = patternText;
+            ReplacementText = replacementText;
+            InputText = inputText;
 
             var list1 = Enum.GetValues(typeof(RegexOptions))
                            .Cast<RegexOptions>()
@@ -47,7 +47,7 @@ namespace Losenkov.RegexEditor.UI.Generators
                 list1.Add("RegexOptions.None");
             }
 
-            this.Options = list1.ToArray();
+            Options = list1.ToArray();
 
             var list2 = new List<MethodOptions>();
             foreach (var mi in new Boolean[] { true, false })
@@ -68,7 +68,7 @@ namespace Losenkov.RegexEditor.UI.Generators
                 }
             }
 
-            this.Methods = list2.ToArray();
+            Methods = list2.ToArray();
         }
 
         internal CodeTemplateBase(ViewModel.IOptions snapshot, Model.RegexMethod regexMethod)

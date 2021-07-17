@@ -4,13 +4,16 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Text.RegularExpressions" #>
 <#@ import namespace="System.Collections.Generic" #>
+using System;
+using System.Text.RegularExpressions;
+
 namespace Test
 {
-  using System;
-  using System.Text.RegularExpressions;
-
   static class Program
   {
+    static String s_pattern = <#= this.QuoteSnippetString(this.PatternText, "        ") #>;
+    static RegexOptions s_options = <#= String.Join(" | ", this.Options) #>;
+    static String s_input = <#= this.QuoteSnippetString(this.InputText, "        ") #>;
 <#
   for (var i = 0; i < this.Methods.Length; i++)
   {
@@ -20,9 +23,7 @@ namespace Test
 #>
     static void <#= methodName #>(String[] args)
     {
-      var pattern = <#= this.QuoteSnippetString(this.PatternText, "        ") #>;
-      var options = <#= String.Join(" | ", this.Options) #>;
-      var regex = new Regex(pattern, options, TimeSpan.FromMilliseconds(1000));
+      var regex = new Regex(s_pattern, s_options, TimeSpan.FromMilliseconds(1000));
 <#
     if (method.RegexMethod == Model.RegexMethod.Match)
     {
@@ -39,15 +40,10 @@ namespace Test
       var replacement = <#= this.QuoteSnippetString(this.ReplacementText, "        ") #>;
 <#
     }
-#>
-
-      var input = <#= this.QuoteSnippetString(this.InputText, "        ") #>;
-
-<#
     if (method.MultilineInput)
     {
 #>
-      using (var reader = new System.IO.StringReader(input))
+      using (var reader = new System.IO.StringReader(s_input))
       {
         for (var i = 1;; i++)
         {
@@ -117,7 +113,7 @@ namespace Test
       if (method.RegexMethod == Model.RegexMethod.Match)
       {
 #>
-      var match = regex.Match(input);
+      var match = regex.Match(s_input);
       if (match.Success)
       {
         Console.WriteLine("Input matches pattern");
@@ -150,14 +146,14 @@ namespace Test
       else if (method.RegexMethod == Model.RegexMethod.Replace)
       {
 #>
-      var result = regex.Replace(input, replacement);
+      var result = regex.Replace(s_input, replacement);
       Console.WriteLine(result);
 <#
       }
       else if (method.RegexMethod == Model.RegexMethod.Split)
       {
 #>
-      var result = regex.Split(input);
+      var result = regex.Split(s_input);
       Console.WriteLine("Input has been split into {0} chunks", result.Length);
       for (var i = 0; i < result.Length; i++)
       {

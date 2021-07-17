@@ -13,6 +13,9 @@ Imports VB = Microsoft.VisualBasic
 
 Namespace Test
   Module Program
+    Private pattern As String = <#= this.QuoteSnippetString(this.PatternText, "        ") #>
+    Private options As RegexOptions = <#= String.Join(" | ", this.Options) #>
+    Private input As String = <#= this.QuoteSnippetString(this.InputText, "        ") #>
 <#
   for (Int32 i = 0; i < this.Methods.Length; i++)
   {
@@ -21,8 +24,6 @@ Namespace Test
 
 #>
     Sub <#= methodName #>(ByVal args As String())
-      Dim pattern As String = <#= this.QuoteSnippetString(this.PatternText, "        ") #>
-      Dim options As RegexOptions = <#= String.Join(" | ", this.Options) #>
       Dim regex As New Regex(pattern, options, TimeSpan.FromMilliseconds(1000))
 <#
     if (method.RegexMethod == Model.RegexMethod.Match)
@@ -40,11 +41,7 @@ Namespace Test
       Dim replacement As String = <#= this.QuoteSnippetString(this.ReplacementText, "        ") #>
 <#
     }
-#>
 
-      Dim input As String = <#= this.QuoteSnippetString(this.InputText, "        ") #>
-
-<#
     if (method.MultilineInput)
     {
 #>
