@@ -2,7 +2,7 @@
 
 [Visual Studio Marketplace Version]: https://img.shields.io/visual-studio-marketplace/v/GeorgyLosenkov.RegexEditorLite
 
-This extension provides tools for Visual Studio 2017 and 2019 that help you to create regular expressions.
+This extension provides tools for Visual Studio 2022 that help you to create regular expressions.
 
 *   **[Regex Editor][]** allows you to create and to test various aspects of the regular expressions
 *   **[Quick Ref Pane][]** allows you to keep information on various elements of the regular expressions language handy

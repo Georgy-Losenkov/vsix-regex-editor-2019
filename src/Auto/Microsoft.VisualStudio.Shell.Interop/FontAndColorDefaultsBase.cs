@@ -310,7 +310,7 @@ namespace Microsoft.VisualStudio.Shell.Interop
             return 0;
         }
 
-        Int32 IVsFontAndColorEvents.OnFontChanged(ref Guid category, FontInfo[] fontInfo, LOGFONTW[] logfont, UInt32 font)
+        Int32 IVsFontAndColorEvents.OnFontChanged(ref Guid category, FontInfo[] fontInfo, LOGFONTW[] logfont, IntPtr font)
         {
             return 0;
         }
