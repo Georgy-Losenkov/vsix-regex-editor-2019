@@ -37,7 +37,8 @@ namespace Losenkov.RegexEditor.UI
               flowDirection: FlowDirection.LeftToRight,
               typeface: new Typeface(self.FontFamily, self.FontStyle, self.FontWeight, self.FontStretch),
               emSize: self.FontSize,
-              foreground: Brushes.Black);
+              foreground: Brushes.Black,
+              pixelsPerDip: 1.0);
 
             return formattedText.Width;
         }
