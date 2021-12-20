@@ -172,7 +172,7 @@ namespace Losenkov.RegexEditor
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            JoinableTaskFactory.RunAsync(ShowToolWindowAsync<T>);
+            JoinableTaskFactory.Run(ShowToolWindowAsync<T>);
         }
 #endif
 
