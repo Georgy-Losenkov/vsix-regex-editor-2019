@@ -12,11 +12,12 @@
         <Tags>Regex, Regular Expressions</Tags>
     </Metadata>
     <Installation>
-        <InstallationTarget Version="[15.0.27413,17.0)" Id="Microsoft.VisualStudio.Community" />
-        <InstallationTarget Version="[15.0.27413,17.0)" Id="Microsoft.VisualStudio.Pro" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0,18.0)">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
     </Installation>
     <Dependencies>
-        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.6,)" />
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.7.2,)" />
     </Dependencies>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="Editor" Path="|Editor|" />
