@@ -1,18 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="RegexEditorLite.Losenkov.bb1b1f45-e8d2-490f-bcf0-5d4e1f77bf05" Version="1.0.5" Language="en-US" Publisher="Georgy Losenkov" />
-        <DisplayName>Regex Editor</DisplayName>
+        <Identity Id="RegexEditor2022.Losenkov.8f92e06e-fe76-42aa-985d-13f60e15e339" Version="1.0.0" Language="en-US" Publisher="Georgy Losenkov" />
+        <DisplayName>Regex Editor for Visual Studio 2022</DisplayName>
         <Description xml:space="preserve">This extension allows you to edit and to test regular expressions.</Description>
+        <MoreInfo>https://github.com/Georgy-Losenkov/vsix-regex-editor-2019</MoreInfo>
         <License>Content\License.txt</License>
         <GettingStartedGuide>Content\QuickStart.docx</GettingStartedGuide>
         <ReleaseNotes>Content\ReleaseNotes.txt</ReleaseNotes>
         <Icon>Content\Icon64.png</Icon>
         <PreviewImage>Content\Editor-Blue.png</PreviewImage>
-        <Tags>Regex, Regular Expressions</Tags>
+        <Tags>Regex, Regular Expression, Regular Expressions</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0,18.0)">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Pro">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[17.0,18.0)" Id="Microsoft.VisualStudio.Enterprise">
             <ProductArchitecture>amd64</ProductArchitecture>
         </InstallationTarget>
     </Installation>
