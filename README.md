@@ -1,4 +1,4 @@
-# ![Icon](assets/Icon32.png) Regex Editor ![Visual Studio 2019 Marketplace Version][] Visual Studio 2022 ![Visual Studio 2022 Marketplace Version][]
+# ![Icon](assets/Icon32.png) Regex Editor ![Visual Studio 2019 Marketplace Version][] ![Visual Studio 2022 Marketplace Version][]
 
 [Visual Studio 2019 Marketplace Version]: https://img.shields.io/visual-studio-marketplace/v/GeorgyLosenkov.RegexEditorLite?label=downloads%20for%20VS2019
 [Visual Studio 2022 Marketplace Version]: https://img.shields.io/visual-studio-marketplace/v/GeorgyLosenkov.RegexEditorForVisualStudio2022?label=downloads%20for%20VS2022
