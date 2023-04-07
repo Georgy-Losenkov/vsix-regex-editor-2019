@@ -13,9 +13,20 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  keyFileName: 'Losenkov.snk'
 
 steps:
-- task: NuGetToolInstaller@1
+- task: DownloadSecureFile@1
+  name: keyFile
+  inputs:
+    secureFile: '$(keyFileName)'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      Copy-Item "$(keyFile.secureFilePath)" -Destination .\Losenkov.snk
 
 - task: NuGetCommand@2
   inputs:
